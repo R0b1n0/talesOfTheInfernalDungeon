@@ -9,6 +9,14 @@ public class ScMenuManager : MonoBehaviour {
     private void Start() {
         animator = GetComponent<Animator>();
     }
+
+    public void Creditin() {
+        animator.SetBool("Creditin", true);
+    }
+
+    public void BackMenu() {
+        animator.SetBool("Creditin", false);
+    }
     public void SelectionMenu() {
         SceneManager.LoadSceneAsync(0);
     }
@@ -23,13 +31,5 @@ public class ScMenuManager : MonoBehaviour {
 
     public void ReplayLevel(){
         
-    }
-
-    public void Creditin() {
-        animator.SetBool("Creditin", true);
-    }
-
-    public void BackMenu() {
-        animator.SetBool("Creditin", false);
     }
 }
