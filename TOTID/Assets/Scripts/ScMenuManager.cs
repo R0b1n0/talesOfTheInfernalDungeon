@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ScMenuManager : MonoBehaviour {
+    public bool credit = false;
+
     public void SelectionMenu() {
         
     }
@@ -13,7 +15,7 @@ public class ScMenuManager : MonoBehaviour {
     }
 
     public void EndCredit(){
-        SceneManager.LoadSceneAsync(1);
+        bool credit = true;
     }
 
     public void MainMenu(){
