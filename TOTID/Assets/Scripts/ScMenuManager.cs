@@ -4,18 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ScMenuManager : MonoBehaviour {
-    public bool credit = false;
+    private Animator animator;
 
+    private void Start() {
+        animator = GetComponent<Animator>();
+    }
     public void SelectionMenu() {
-        
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void QuitGame() {
         Application.Quit();
-    }
-
-    public void EndCredit(){
-        bool credit = true;
     }
 
     public void MainMenu(){
@@ -26,4 +25,11 @@ public class ScMenuManager : MonoBehaviour {
         
     }
 
+    public void Creditin() {
+        animator.SetBool("Creditin", true);
+    }
+
+    public void BackMenu() {
+        animator.SetBool("Creditin", false);
+    }
 }
