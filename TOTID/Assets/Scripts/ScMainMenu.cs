@@ -4,11 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ScMainMenu : MonoBehaviour {
-    public void PlayGame() {
-        SceneManager.LoadSceneAsync("Game");
+    public void SelectionMenu() {
+        
     }
 
     public void QuitGame() {
         Application.Quit();
     }
+
+    public void EndCredit(){
+        SceneManager.LoadSceneAsync(1);
+    }
+
 }
