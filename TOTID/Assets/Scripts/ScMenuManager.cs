@@ -14,8 +14,12 @@ public class ScMenuManager : MonoBehaviour {
         animator.SetBool("Creditin", true);
     }
 
+    public void LoadSettings() {
+        animator.SetBool("Settings", true);
+    }
     public void BackMenu() {
         animator.SetBool("Creditin", false);
+        animator.SetBool("Settings", false);
     }
     public void SelectionMenu() {
         SceneManager.LoadSceneAsync(0);
