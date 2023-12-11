@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScAudioMangaer : MonoBehaviour {
     [Header("~~~~~~~~ Audio Source ~~~~~~~~")]
     [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource sfxSource;
+    [SerializeField] AudioSource SFXSource;
 
     [Header("~~~~~~~~ Audio Clip ~~~~~~~~")]
     public AudioClip background;
@@ -17,6 +17,6 @@ public class ScAudioMangaer : MonoBehaviour {
     }
 
     public void PlaySFX(AudioClip clip){
-        sfxSource.PlayOneShot(clip);
+        SFXSource.PlayOneShot(clip);
     }
 }
