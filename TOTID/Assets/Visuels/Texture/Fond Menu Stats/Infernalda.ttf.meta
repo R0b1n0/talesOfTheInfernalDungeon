@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 72990a885cf7ed846828de0d9b60ff0f
+guid: 351cedded3a3b5e448ec9857c64d3677
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - PlAGuEdEaTH
+  - Infernalda
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
