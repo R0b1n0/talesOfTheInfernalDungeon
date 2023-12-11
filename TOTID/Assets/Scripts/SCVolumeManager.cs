@@ -9,13 +9,18 @@ public class SCVolumeManager : MonoBehaviour {
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider SFXSlider;
 
+    private void Start() {
+        SetMusicVolume();
+        SetSFXVolume();
+    }
+
     public void SetMusicVolume() {
-        float musVolume = musicSlider.value;
-        audioMixer.SetFloat("music",musVolume);
+        float musicVolume = musicSlider.value;
+        audioMixer.SetFloat("music",Mathf.Log10(musicVolume)*20);
     }
 
     public void SetSFXVolume() {
         float SFXVolume = SFXSlider.value;
-        audioMixer.SetFloat("music",SFXVolume);
+        audioMixer.SetFloat("SFX",Mathf.Log10(SFXVolume)*20);
     }
 }
