@@ -51,7 +51,7 @@ public class Sccyclemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.anyKeyDown && ennemiActionEvent != null)
+        if(Input.GetKeyDown(KeyCode.Escape) && ennemiActionEvent != null)
         {
             ennemiActionEvent.Invoke();
         }
