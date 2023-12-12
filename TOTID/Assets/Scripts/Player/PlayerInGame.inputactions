@@ -1,0 +1,54 @@
+{
+    "name": "PlayerInGame",
+    "maps": [
+        {
+            "name": "Ingame",
+            "id": "dafb93a9-d4c5-424e-90e4-449e79b60621",
+            "actions": [
+                {
+                    "name": "mouseMovement",
+                    "type": "Value",
+                    "id": "3e93339e-ca87-4bc3-a403-40f649354e10",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "leftMouseAction",
+                    "type": "Button",
+                    "id": "2c2e18fe-7059-4dbe-8edc-e5b5202234e2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c7f34b6d-f133-4aef-8f3c-857ad3f15bbb",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "mouseMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e2b514e6-3c07-40ef-82de-a8790211bbba",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "leftMouseAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
