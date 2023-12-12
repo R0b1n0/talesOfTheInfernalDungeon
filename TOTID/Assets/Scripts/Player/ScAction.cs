@@ -25,6 +25,8 @@ public class ScAction : MonoBehaviour
                 case 6:
                     List<ScWayPoint> path = hit.transform.GetComponent<ScRoom>().FindPathBetween(hit.point, movementScript.GetCurrentCell());
                     
+                    movementScript.SetPath(path);
+
                     
                     break;
             }

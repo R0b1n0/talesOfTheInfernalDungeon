@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using static UnityEngine.UI.Image;
+
+
 
 public class ScRoom : MonoBehaviour
 {
@@ -13,15 +16,23 @@ public class ScRoom : MonoBehaviour
     [SerializeField] float yOffset;
     [SerializeField] GameObject eedededed;
 
+    [SerializeField]List<neighborRoom> neihborRooms = new List<neighborRoom>();
+
 
     private List<List<ScWayPoint>> myGraph = new List<List<ScWayPoint>>();
     private Transform myTrans;
     private ScWayPoint wayPointDestination;
     private List<ScWayPoint> path;
 
+    private void Awake()
+    {
+        ScMapManagor.Instance.roomCount++;
+    }
+
     void Start()
     {
-        myTrans = transform;
+        myTrans = transform; 
+        ScMapManagor.Instance.getYourNeighbors.AddListener(FindWayPointInOtherRoom);
         MapEnvironement();
 
     }
@@ -88,6 +99,7 @@ public class ScRoom : MonoBehaviour
             }
         }
         CreateGraph();
+        ScMapManagor.Instance.RoomReady();
     }
     private void CreateGraph()
     {
@@ -116,5 +128,130 @@ public class ScRoom : MonoBehaviour
             myGraph[raw][column + 1].AddNewNeighbor(myGraph[raw][column]);
         }
     }
+
+    private void FindWayPointInOtherRoom()
+    {
+        for (int i = 0; i < neihborRooms.Count; i++)
+        {
+            
+            List<ScWayPoint> pointToStudy = neihborRooms[i].roomScript.GetAllWayPointOnEdge(neihborRooms[i].directionToRoom);
+
+            switch (neihborRooms[i].directionToRoom) 
+            {
+                case cardinal.North:
+                    for (int myRaw = 0; myRaw < myGraph[0].Count; myRaw++)
+                    {
+                        for (int hisRaw = 0; hisRaw < pointToStudy.Count; hisRaw++)
+                        {
+                            if ( myGraph[0][myRaw] != null && pointToStudy[hisRaw] != null)
+                            {
+                                if (Vector3.Distance(myGraph[0][myRaw].wayPointId, pointToStudy[hisRaw].wayPointId) == cellSize )
+                                {
+                                    myGraph[0][myRaw].AddNewNeighbor(pointToStudy[hisRaw]);
+                                    pointToStudy[hisRaw].AddNewNeighbor(myGraph[0][myRaw]);
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case cardinal.South:
+                    for (int myRaw = 0; myRaw < myGraph[myGraph.Count-1].Count; myRaw++)
+                    {
+                        for (int hisRaw = 0; hisRaw < pointToStudy.Count; hisRaw++)
+                        {
+                            if (myGraph[myGraph.Count - 1][myRaw] != null && pointToStudy[hisRaw] != null)
+                            {
+                                if (Vector3.Distance(myGraph[myGraph.Count - 1][myRaw].wayPointId, pointToStudy[hisRaw].wayPointId) == cellSize)
+                                {
+                                    myGraph[myGraph.Count - 1][myRaw].AddNewNeighbor(pointToStudy[hisRaw]);
+                                    pointToStudy[hisRaw].AddNewNeighbor(myGraph[myGraph.Count - 1][myRaw]);
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case cardinal.West:
+                    for (int myRaw = 0; myRaw < myGraph.Count; myRaw++)
+                    {
+                        for (int hisRaw = 0; hisRaw < pointToStudy.Count; hisRaw++)
+                        {
+                            if (myGraph[myRaw][0] != null && pointToStudy[hisRaw] != null)
+                            {
+                                if (Vector3.Distance(myGraph[myRaw][0].wayPointId, pointToStudy[hisRaw].wayPointId) == cellSize)
+                                {
+                                    myGraph[myRaw][0].AddNewNeighbor(pointToStudy[hisRaw]);
+                                    pointToStudy[hisRaw].AddNewNeighbor(myGraph[myRaw][0]);
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case cardinal.Est:
+                    for (int myRaw = 0; myRaw < myGraph.Count; myRaw++)
+                    {
+                        for (int hisRaw = 0; hisRaw < pointToStudy.Count; hisRaw++)
+                        {
+                            if (myGraph[myRaw][myGraph[myRaw].Count-1] != null && pointToStudy[hisRaw] != null)
+                            {
+                                if (Vector3.Distance(myGraph[myRaw][myGraph[myRaw].Count - 1].wayPointId, pointToStudy[hisRaw].wayPointId) == cellSize)
+                                {
+                                    myGraph[myRaw][myGraph[myRaw].Count - 1].AddNewNeighbor(pointToStudy[hisRaw]);
+                                    pointToStudy[hisRaw].AddNewNeighbor(myGraph[myRaw][myGraph[myRaw].Count - 1]);
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
+    private List<ScWayPoint> GetAllWayPointOnEdge(cardinal edge)
+    {
+        List<ScWayPoint> result = new List<ScWayPoint>();
+        switch (edge)
+        {
+            case cardinal.North:
+                result = myGraph[myGraph.Count - 1];
+                break;
+            case cardinal.South:
+                result = myGraph[0];
+                break;
+
+            case cardinal.Est:
+                foreach(List<ScWayPoint> list in myGraph)
+                {
+                        result.Add(list[0]);
+                }
+                break;
+
+            case cardinal.West:
+                foreach (List<ScWayPoint> list in myGraph)
+                {
+                        result.Add(list[list.Count - 1]);
+                }
+                break;
+        }
+        return result;
+    }
     #endregion
+}
+
+[Serializable]
+public enum cardinal
+{
+    North,
+    South,
+    Est,
+    West
+}
+
+[Serializable]
+public struct neighborRoom
+{
+    public ScRoom roomScript;
+    public cardinal directionToRoom;
 }

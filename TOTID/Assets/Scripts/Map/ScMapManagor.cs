@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class ScMapManagor : MonoBehaviour
 {
@@ -9,12 +12,15 @@ public class ScMapManagor : MonoBehaviour
     private Dictionary<Vector3, Node> open = new Dictionary<Vector3, Node>(); 
     private List<Vector3> openKeyList = new List<Vector3>();
     private Dictionary<Vector3, Node> closed = new Dictionary<Vector3, Node>(); 
+    public int roomCount = 0;
 
     private Node nodeToEvaluate = null;
     private Node destinationNode= null;
     private Node startNode= null;
 
     private List<ScWayPoint> path = new List<ScWayPoint>();
+
+    public UnityEvent getYourNeighbors;
 
     private void Awake()
     {
@@ -24,10 +30,10 @@ public class ScMapManagor : MonoBehaviour
             Destroy(this);
     }
 
-
     public List<ScWayPoint> FindPath(ScWayPoint start, ScWayPoint destination)
     {
         open.Clear();
+        openKeyList.Clear();
         closed.Clear();
 
         float firstNodeWeight = GetNodePotential(start,destination);
@@ -45,7 +51,6 @@ public class ScMapManagor : MonoBehaviour
 
         return path;
     }
-
     private void EvaluateNode()
     {
 
@@ -105,7 +110,8 @@ public class ScMapManagor : MonoBehaviour
     }
     private void FindSmallestWeight()
     {
-        float minWeight = minWeight = open[openKeyList[openKeyList.Count - 1]].weight;
+
+        float minWeight = minWeight = open[openKeyList[0]].weight;
 
         foreach (KeyValuePair<Vector3,Node> node in open)
         {
@@ -130,6 +136,16 @@ public class ScMapManagor : MonoBehaviour
         if (parent != null)
         {
             CreatPath(closed[parent.wayPointId]);
+        }
+    }
+
+
+    public void RoomReady()
+    {
+        roomCount--;
+        if (roomCount == 0)
+        {
+            getYourNeighbors.Invoke();
         }
     }
 }

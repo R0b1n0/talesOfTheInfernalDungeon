@@ -6,10 +6,26 @@ public class ScMovement : MonoBehaviour
 {
     private ScWayPoint currentCell;
     private List<ScWayPoint> path = new List<ScWayPoint>();
+    Vector3 previousPos;
 
     private void Start()
     {
         FindFIrstCell();
+    }
+
+    private void Update()
+    {
+        if (path.Count > 0) 
+        {
+            if (Vector3.Distance(transform.position,path[path.Count-1].wayPointId + new Vector3(0, 1, 0)) < 0.1f)
+            {
+                previousPos = path[path.Count - 1].wayPointId;
+                currentCell = path[path.Count - 1];
+                path.Remove(path[path.Count-1]);
+            }
+            else
+                transform.position = Vector3.Lerp(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 50);
+        }
     }
 
     public void SetCurrentCell(ScWayPoint myCurrentCell)
