@@ -370,7 +370,7 @@ MonoBehaviour:
   ennemiDamage: 0
   ennemimeRange: 0
   ennemiSpeed: 0
-  ennemiTakeDamage: 0
+  projectile: {fileID: 9207237820706287217, guid: 62225d1d93c367c4cad22769c82075fb, type: 3}
 --- !u!136 &1184554220
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -772,7 +772,6 @@ MonoBehaviour:
   ennemiDamage: 0
   ennemimeRange: 0
   ennemiSpeed: 0
-  ennemiTakeDamage: 0
 --- !u!1 &1646854145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,7 +1028,6 @@ MonoBehaviour:
   ennemiDamage: 0
   ennemimeRange: 0
   ennemiSpeed: 0
-  ennemiTakeDamage: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
