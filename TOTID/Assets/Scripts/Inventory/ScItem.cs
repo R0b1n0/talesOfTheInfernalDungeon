@@ -1,11 +1,25 @@
 ﻿using UnityEngine;
 
+
 [System.Serializable]
 public struct ScItem
 {
     [SerializeField] private int count;
     [SerializeField] private ScItemData data;
+    #region Stats Weapon
+    public void Equip(ScCharacter c)
+    {
+        c.strengh.AddModifier(new ScStatsModifier(10, StatModType.Flat, this));
+        c.strengh.AddModifier(new ScStatsModifier(0.1f, StatModType.PercentMult, this));
+    }
 
+    public void UnEquip(ScCharacter c)
+    {
+        c.strengh.RemoveAllModifiersFromSource(this);
+    }
+    #endregion
+
+    #region inventory Item
     public void Merge(ref ScItem other)
     {
         if (Full) return;
@@ -38,5 +52,5 @@ public struct ScItem
     public int Count => count;
 
     // Essaye de futionner les stack 
-
- }
+    #endregion
+}

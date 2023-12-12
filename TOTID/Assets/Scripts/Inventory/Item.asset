@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d2a8c43ee1d046458d7099b616677b2, type: 3}
-  m_Name: Test 1
+  m_Name: Item
   m_EditorClassIdentifier: 
-  itemName: a
+  itemName: A
   stackMaxCount: 1
-  icon: {fileID: 241620830004830169, guid: e362bc6a7c79fce4db16d145d43a5550, type: 3}
+  icon: {fileID: 781615245368611544, guid: 5fd9f3ec1e3e0bc4d8e308e10012a36a, type: 3}
+  description: bip bop
+  id: 1
