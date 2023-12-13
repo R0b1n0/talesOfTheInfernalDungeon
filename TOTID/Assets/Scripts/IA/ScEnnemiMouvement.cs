@@ -64,4 +64,10 @@ public class ScEnnemiMouvement : MonoBehaviour
     {
         path = newPath;
     }
+
+
+
+
 }
+
+
