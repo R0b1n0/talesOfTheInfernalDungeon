@@ -1866,6 +1866,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448895572}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1456967536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1337744512803710078, guid: b903a54ed7065d3458fcaba7f141ed75, type: 3}
+  m_PrefabInstance: {fileID: 86572976}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1456967537 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2026286272986377127, guid: b903a54ed7065d3458fcaba7f141ed75, type: 3}
@@ -2624,7 +2629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraHolder: {fileID: 472756551}
-  highlight: {fileID: 0}
+  highlight: {fileID: 1456967536}
   highlightTransform: {fileID: 1456967537}
 --- !u!1 &1995340384
 GameObject:
