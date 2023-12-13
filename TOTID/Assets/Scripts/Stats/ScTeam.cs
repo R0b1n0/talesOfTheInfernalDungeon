@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using CharactherStats;
 
 public class ScTeam : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class ScTeam : MonoBehaviour
 }
 
 [Serializable]
-public class ScCharacter 
+public class ScInfoCharacter 
 {
     public Sprite text;
     public int id; 

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 
-[Serializable]
+namespace CharactherStats
+{ 
+    
+    [Serializable]
 public class ScCharactereStats
 {
     public float baseValue;
@@ -113,4 +116,5 @@ public class ScCharactereStats
         return (float)Math.Round(finalValue, 4);
     }
     #endregion
+}
 }
