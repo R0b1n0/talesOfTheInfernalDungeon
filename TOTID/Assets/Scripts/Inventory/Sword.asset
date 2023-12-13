@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b16a2a015397e2949ac23eae0f3ba299, type: 3}
-  m_Name: item
+  m_Name: Sword
   m_EditorClassIdentifier: 
-  nameItem: Item
-  icon: {fileID: 6868122594974341346, guid: 18a451ae5d817e04bbf3101eaed9466e, type: 3}
-  strengthBonus: 0
+  nameItem: sword
+  icon: {fileID: 781615245368611544, guid: 62a315a8619ac644f899c29e008115c0, type: 3}
+  strengthBonus: 20
   healthBonus: 0
   strengthPercent: 0
   healthPercent: 0
-  equipmentType: 1
+  equipmentType: 0
