@@ -37,4 +37,8 @@ public class ScMenuManager : MonoBehaviour {
     public void ReplayLevel(){
         
     }
+    public void Play()
+    {
+        SceneManager.LoadScene("RobScene");
+    }
 }
