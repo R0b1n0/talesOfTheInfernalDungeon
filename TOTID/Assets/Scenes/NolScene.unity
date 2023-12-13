@@ -904,6 +904,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 437595706}
         m_TargetAssemblyTypeName: ScMenuManager, Assembly-CSharp
+
         m_MethodName: SelectionMenu
         m_Mode: 1
         m_Arguments:

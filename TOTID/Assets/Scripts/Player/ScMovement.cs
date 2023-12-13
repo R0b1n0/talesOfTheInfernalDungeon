@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class ScMovement : MonoBehaviour
 {
+    public static ScMovement Instance;
     private ScWayPoint currentCell;
     private List<ScWayPoint> path = new List<ScWayPoint>();
     Vector3 previousPos;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
 
     private void Start()
     {
