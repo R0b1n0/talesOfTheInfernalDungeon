@@ -17,14 +17,17 @@ public class ScMenuManager : MonoBehaviour {
     public void LoadSettings() {
         animator.SetBool("Settings", true);
     }
-    
+
+    public void SelectionMenu(){
+        animator.SetBool("Selecting", true);
+    }
+
     public void BackMenu() {
         animator.SetBool("Creditin", false);
         animator.SetBool("Settings", false);
+        animator.SetBool("Selecting", false);
     }
-    public void SelectionMenu() {
-        SceneManager.LoadSceneAsync(0);
-    }
+    
 
     public void QuitGame() {
         Application.Quit();
@@ -32,6 +35,10 @@ public class ScMenuManager : MonoBehaviour {
 
     public void MainMenu(){
         SceneManager.LoadSceneAsync(0);
+    }
+
+    public void LevelTutorial() {
+        SceneManager.LoadSceneAsync(1);
     }
 
     public void ReplayLevel(){
