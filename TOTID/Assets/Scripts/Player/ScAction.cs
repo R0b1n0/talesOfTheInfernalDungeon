@@ -33,6 +33,9 @@ public class ScAction : MonoBehaviour {
                     movementScript.SetPath(path);
                     
                     break;
+                case 7:
+                    Debug.Log("Chest touch");
+                    break;
             }
         }
     }
