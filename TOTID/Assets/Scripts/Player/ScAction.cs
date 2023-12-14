@@ -6,6 +6,7 @@ public class ScAction : MonoBehaviour
 {
     [SerializeField] Transform cameraHolder;
     private ScMovement movementScript;
+    private ScGps myTomTom = new ScGps();
 
     private void Start()
     {
@@ -23,9 +24,10 @@ public class ScAction : MonoBehaviour
             switch (hit.transform.gameObject.layer)
             {
                 case 6:
-                    List<ScWayPoint> path = hit.transform.GetComponent<ScRoom>().FindPathBetween(hit.point, movementScript.GetCurrentCell());
+                    ScWayPoint destination = hit.transform.GetComponent<ScRoom>().FindClossestCell(hit.point);
+
                     
-                    movementScript.SetPath(path);
+                    movementScript.SetPath(myTomTom.FindPath(movementScript.GetCurrentCell(), destination));
 
                     
                     break;
