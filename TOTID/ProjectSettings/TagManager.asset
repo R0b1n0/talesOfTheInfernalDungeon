@@ -5,8 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Audio
-  - Chest
-  - Door
   layers:
   - Default
   - TransparentFX
