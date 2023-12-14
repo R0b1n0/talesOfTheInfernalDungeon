@@ -15,9 +15,9 @@ public class ScCharactereStats
     private readonly List<ScStatsModifier> statsModifiers;
     public readonly ReadOnlyCollection<ScStatsModifier> StatsModifiers;
 
-    public float Value {
+    public virtual float Value {
      get{
-            if (isDirty || baseValue != lastBaseValue)
+            if (isDirty || lastBaseValue != baseValue)
             {
                 lastBaseValue = baseValue;
                 valueSc = CalculatedFinalValue();

@@ -4,7 +4,7 @@ using CharactherStats;
 
 public class ScTeam : MonoBehaviour
 {
-    public ScCharacter[] team = new ScCharacter[] { new ScCharacter(),  new ScCharacter() , new ScCharacter()};
+    public ScCharacter[] team = new ScCharacter[] { new ScCharacter(), new ScCharacter(), new ScCharacter() };
     
 }
 

@@ -30,11 +30,11 @@ public class ScEquipableItem : ScItem
         
         if(healthBonus != 0)
         {
-            c.strength.AddModifier(new ScStatsModifier(healthBonus, StatModType.Flat, this));
+            c.health.AddModifier(new ScStatsModifier(healthBonus, StatModType.Flat, this));
         }        
         if(healthPercent != 0)
         {
-            c.strength.AddModifier(new ScStatsModifier(healthPercent, StatModType.PercentMult, this));
+            c.health.AddModifier(new ScStatsModifier(healthPercent, StatModType.PercentMult, this));
         }
     }
 

@@ -6,14 +6,26 @@ public class ScEquipmentPanel : MonoBehaviour
     [SerializeField] Transform equipmentSlotsParent;
     [SerializeField] ScEquipmentSlot[] equipmentSlots;
 
-    public event Action<ScItem> OnItemRightClickedEvent;
+    public event Action<ScItemSlot> OnPointerExitEvent;
+    public event Action<ScItemSlot> OnPointerEnterEvent;
+    public event Action<ScItemSlot> OnRightClickEvent;
+    public event Action<ScItemSlot> OnBeginDragEvent;
+    public event Action<ScItemSlot> OnEndDragEvent;
+    public event Action<ScItemSlot> OnDragEvent;
+    public event Action<ScItemSlot> OnDropEvent;
 
 
-    private void Awake()
+    private void Start()
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
-            equipmentSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
+            equipmentSlots[i].OnPointerEnterEvent += OnPointerEnterEvent;
+            equipmentSlots[i].OnPointerExitEvent += OnPointerExitEvent;
+            equipmentSlots[i].OnRightClickEvent += OnRightClickEvent;
+            equipmentSlots[i].OnBeginDragEvent += OnBeginDragEvent;
+            equipmentSlots[i].OnEndDragEvent += OnEndDragEvent;
+            equipmentSlots[i].OnDragEvent += OnDragEvent;
+            equipmentSlots[i].OnDropEvent += OnDropEvent;
         }
     }
     private void OnValidate()

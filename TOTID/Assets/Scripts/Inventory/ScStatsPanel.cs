@@ -27,6 +27,11 @@ public class ScStatsPanel : MonoBehaviour
         for (int i = 0; i < statsDisplays.Length; i++)
         {
             statsDisplays[i].gameObject.SetActive(i < stats.Length);
+
+            if(i < stats.Length)
+            {
+                statsDisplays[i].Stats = stats[i];
+            }
         }
     }
 
@@ -34,14 +39,14 @@ public class ScStatsPanel : MonoBehaviour
     {
         for (int i = 0;i < stats.Length; i++)
         {
-            statsDisplays[i].valueText.text = stats[i].Value.ToString();
+            statsDisplays[i].UpdateStatValue();
         }
     }    
     public void UpdateStatsName()
     {
         for (int i = 0;i < statsName.Length; i++)
         {
-            statsDisplays[i].nameText.text = statsName[i];
+            statsDisplays[i].Name = statsName[i];
         }
     }
 }

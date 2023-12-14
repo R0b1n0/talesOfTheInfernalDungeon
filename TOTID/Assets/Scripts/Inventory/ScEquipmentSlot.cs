@@ -8,4 +8,14 @@ public class ScEquipmentSlot : ScItemSlot
         base.OnValidate();
         gameObject.name = EquipmentType.ToString() + " Slot";
     }
+
+    public override bool CanReceiveItem(ScItem item)
+    {
+        if(item == null)
+            return true;
+
+        ScEquipableItem equipableItem = item as ScEquipableItem;
+        return equipableItem != null && equipableItem.equipmentType == EquipmentType;
+
+    }
 }
