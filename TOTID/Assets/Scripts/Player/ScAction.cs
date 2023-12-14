@@ -34,7 +34,7 @@ public class ScAction : MonoBehaviour {
                     
                     break;
                 case 7:
-                    Debug.Log("Chest touch");
+                    viewHit.transform.GetComponent<ScInteractible>().Interact();
                     break;
             }
         }
