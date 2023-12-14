@@ -156,7 +156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d6943800638b1b84a97d70e97af15ed6, type: 2}
+  - {fileID: 2100000, guid: a7619d06c049a974ca68513a161e2baf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -396,7 +396,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5542645d34abae44190e961219881fc2, type: 2}
+  - {fileID: 2100000, guid: fc37c584ec5a0ab4cbc78ca6a0811ed6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -501,7 +501,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5542645d34abae44190e961219881fc2, type: 2}
+  - {fileID: 2100000, guid: c03255d97d7e95946b7381d7e7bdd11b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -606,7 +606,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5542645d34abae44190e961219881fc2, type: 2}
+  - {fileID: 2100000, guid: cc5b1bd8d0b189445aea0251f33a4a60, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -709,6 +709,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: plafond salle
       objectReference: {fileID: 0}
+    - target: {fileID: 6933794021865826411, guid: 62360167e5ca8c1409026b239df85690, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dfa0f2259a93a8f4cbd65349b747622f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
