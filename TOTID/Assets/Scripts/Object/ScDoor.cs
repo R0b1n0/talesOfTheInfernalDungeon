@@ -11,13 +11,11 @@ public class ScDoor : ScInteractible {
         parentTransform = transform.root;
     }
     public void DoorOpen() {
-        Debug.Log("Door Open");
         isDoorOpen = true;
         parentTransform.Rotate(0, -90, 0);
     }
 
     public void DoorClose(){
-        Debug.Log("Door Close");
         isDoorOpen = false;
         parentTransform.Rotate(0, 90, 0);
     }
