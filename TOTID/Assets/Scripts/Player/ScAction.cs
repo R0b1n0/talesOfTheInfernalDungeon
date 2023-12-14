@@ -7,6 +7,9 @@ public class ScAction : MonoBehaviour
     [SerializeField] Transform cameraHolder;
     private ScMovement movementScript;
     private ScGps myTomTom = new ScGps();
+    [SerializeField] private int maxAactionPoint;
+    private int currentActionPoint;
+
 
     private void Start()
     {
@@ -38,5 +41,14 @@ public class ScAction : MonoBehaviour
     public void ActionOnClick()
     {
 
+    }
+
+    public void UseOneActionPoint()
+    {
+        currentActionPoint--;
+        if (currentActionPoint == 0)
+        {
+            Sccyclemanager.instance.PlayerTurnOver();
+        }
     }
 }

@@ -5,8 +5,10 @@ using UnityEngine;
 public class ScMovement : MonoBehaviour
 {
     public static ScMovement Instance;
+
     public ScWayPoint currentCell;
     private List<ScWayPoint> path = new List<ScWayPoint>();
+    private ScAction actionScript;
     Vector3 previousPos;
 
     private void Awake()
@@ -20,6 +22,7 @@ public class ScMovement : MonoBehaviour
     private void Start()
     {
         FindFIrstCell();
+        actionScript = GetComponent<ScAction>();
     }
 
     private void Update()
@@ -31,6 +34,7 @@ public class ScMovement : MonoBehaviour
                 previousPos = path[path.Count - 1].wayPointId;
                 currentCell = path[path.Count - 1];
                 path.Remove(path[path.Count-1]);
+                actionScript.UseOneActionPoint();
             }
             else
                 transform.position = Vector3.Lerp(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 50);

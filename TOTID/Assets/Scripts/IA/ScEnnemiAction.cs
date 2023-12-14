@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class ScEnnemiAction : MonoBehaviour
 {
     ScWayPoint currentCell;
-    private ScMovement movementScript;
+    private ScEnnemiMouvement ennemiMovementScript;
     private List<ScWayPoint> path = new List<ScWayPoint>();
     private ScWayPoint neighbor;
 
@@ -19,35 +19,14 @@ public class ScEnnemiAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        movementScript = GetComponent<ScMovement>();
+        ennemiMovementScript = GetComponent<ScEnnemiMouvement>();
     }
 
-    private void  RaycastGround()
+    private void  MoveRandom()
     {
-        Ray groundCheck = new Ray(transform.position, Vector3.down);
-        RaycastHit hit = new RaycastHit();
-        Physics.Raycast(groundCheck, out hit);
-
-        if (hit.collider != null)
-        {
-            switch (hit.transform.gameObject.layer)
-            {
-                case 6:
-                    List<ScWayPoint> path = hit.transform.GetComponent<ScRoom>().FindClossestCell(ScMovement.Instance.currentCell.wayPointId).GetAllNeighbors();
-
-                    movementScript.SetPath(path);
-
-
-                    break;
-            }
-        }
+        
     }
 
-
-    private void OnActionTurn()
-    {
-
-    }
 
   
     // Update is called once per frame
@@ -55,7 +34,6 @@ public class ScEnnemiAction : MonoBehaviour
     {
         if (EnnemiTurn == true)
         {
-            RaycastGround();
             EnnemiTurn = false;
             //List<ScWayPoint> path = hit.transform.GetComponent<ScRoom>().FindPathBetween(hit.point, movementScript.GetCurrentCell());
 

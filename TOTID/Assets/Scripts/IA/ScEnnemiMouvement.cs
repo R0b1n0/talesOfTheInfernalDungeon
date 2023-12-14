@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class ScEnnemiMouvement : MonoBehaviour
 {
-    public static ScEnnemiMouvement Instance;
+    
     public ScWayPoint currentCell;
     private List<ScWayPoint> path = new List<ScWayPoint>();
     Vector3 previousPos;
 
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(this);
-    }
+  
 
     private void Start()
     {
