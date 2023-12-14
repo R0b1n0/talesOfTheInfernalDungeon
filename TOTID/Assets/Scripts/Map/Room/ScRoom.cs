@@ -37,13 +37,6 @@ public class ScRoom : MonoBehaviour
 
     }
 
-    public List<ScWayPoint> FindPathBetween(Vector3 destination, ScWayPoint origin)
-    {
-        
-        wayPointDestination = FindClossestCell(destination);
-        path = ScMapManagor.Instance.FindPath(origin, wayPointDestination);
-        return path;
-    }
 
     public ScWayPoint FindClossestCell(Vector3 destination)
     {
