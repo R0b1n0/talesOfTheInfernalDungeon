@@ -6,32 +6,31 @@ using UnityEngine;
 public class ScChest : ScInteractible {
     private Animator animator;
     [SerializeField] GameObject[] loot;
-
-
     private bool isChestOpen = false;
+    public float power = 3f;
+    [SerializeField] Transform spawnPoint;
 
-    public float power = 5f;
-
-    private void Start()
-    {
+    private void Start(){
         animator = GetComponent<Animator>();
     }
 
     public void ChestOpen() {
         if (!isChestOpen) {
-            Debug.Log("Open");
             isChestOpen = true;
             animator.SetBool("ChestOpenin", true);
-            for (int i = 0; i<loot.Length; i++) {
-                GameObject newLoot = Instantiate(loot[i], transform.position + Vector3.up, Quaternion.identity);
-                Rigidbody body = newLoot.GetComponent<Rigidbody>();
-                if (body != null ) {
-                    Vector3 dir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 2f), Random.Range(-1f, 1f)).normalized;
-                    body.AddForce(dir * power, ForceMode.Impulse);
-                }
-            }
         } else {
             return;
+        }
+    }
+
+    public void ChestLooting (){
+        for (int i = 0; i<loot.Length; i++) {
+                GameObject newLoot = Instantiate(loot[i], spawnPoint.position, Quaternion.identity);
+                Rigidbody body = newLoot.AddComponent<Rigidbody>();
+            if (body != null) {
+                Vector3 dir = new Vector3(0, Random.Range(0.1f, 0.5f), 0).normalized + spawnPoint.forward*Random.Range(0.01f,0.05f);
+                body.AddForce((dir * power), ForceMode.Impulse);
+            }
         }
     }
 
@@ -40,7 +39,6 @@ public class ScChest : ScInteractible {
     }
 
     public override void Interact() {
-        Debug.Log("Open1A");
         ChestOpen();
     }
 }
