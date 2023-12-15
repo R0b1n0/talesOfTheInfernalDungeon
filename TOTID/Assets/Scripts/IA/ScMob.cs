@@ -12,12 +12,12 @@ public class ScMob : MonoBehaviour
     protected int currentActionPoint;
 
     protected ScMovement playerMovementRef;
-    protected Transform myTrans;
+    public Transform myTrans;
     protected ScGps myGps = new ScGps();
 
     protected ScMoveNode scMoveNode ;
 
-    protected ScWayPoint currentCell;
+    public ScWayPoint currentCell;
     protected ScWayPoint nextCell;
     private List<ScWayPoint> path = new List<ScWayPoint>();
     private List<ScWayPoint> patrolWayPoint = new List<ScWayPoint>();
@@ -28,7 +28,7 @@ public class ScMob : MonoBehaviour
 
     private void Awake()
     {
-        myState = MobState.Aggro;
+        myState = MobState.Idle;
         myTrans = transform;
         playerMovementRef = ScMovement.Instance;
         Sccyclemanager.instance.ennemiActionEvent.AddListener(Behave);
@@ -48,8 +48,11 @@ public class ScMob : MonoBehaviour
                 path.Remove(path[path.Count - 1]);
                 currentActionPoint--;
             }
-            else
+            else      
+            {
                 myTrans.position = Vector3.Lerp(myTrans.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 50);
+                myTrans.forward = (path[path.Count - 1].wayPointId - currentCell.wayPointId);
+            }
         }
         
 
@@ -92,6 +95,22 @@ public class ScMob : MonoBehaviour
         }
     } //always put this one in the mob start 
 
+
+    protected void FindPlayer()
+    {
+        if(path.Count == 0)
+        {
+            path = myGps.FindPath(currentCell, ScMovement.Instance.currentCell);
+            path.Remove(path[0]);
+        }
+    }
+
+    protected void ChasePlayer()
+    {
+        
+    }
+
+
     protected void ActionEnd()
     { 
         if (currentActionPoint == 0)
@@ -106,12 +125,18 @@ public class ScMob : MonoBehaviour
     }
     public void SetState(MobState newState)
     {
+        if(newState != myState)
+        {
+            path.Clear();
+        }
         myState = newState;
     }
 
     protected virtual void Behave() { }
     protected virtual void Attack() { }
     protected virtual void GetDamage() { }
+
+
 }
 
 

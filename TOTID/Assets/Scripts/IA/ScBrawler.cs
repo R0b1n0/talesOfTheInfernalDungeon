@@ -37,6 +37,17 @@ public class ScBrawler : ScMob
                 MoveToNextDestination();
                 ActionEnd();
                 break;
+            case MobState.Aggro:
+                ChasePlayer();
+                MoveToNextDestination();
+                if(Vector3.Distance(ScMovement.Instance.currentCell.wayPointId, currentCell.wayPointId) > 30)
+                {
+                    SetState(MobState.Idle);
+                }
+                ActionEnd();
+                break;
+            case MobState.Attack:  
+                break;
         }
     }
 }
