@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class ScInteractible : MonoBehaviour {
 
-    public virtual void Interact()
-    {
-
-    }
+    public virtual void Interact(){}
 }
