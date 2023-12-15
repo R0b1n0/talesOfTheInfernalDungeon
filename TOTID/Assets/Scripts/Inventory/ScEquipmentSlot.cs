@@ -1,4 +1,4 @@
-
+using UnityEngine;
 
 public class ScEquipmentSlot : ScItemSlot
 {
@@ -13,6 +13,7 @@ public class ScEquipmentSlot : ScItemSlot
     {
         if(item == null)
             return true;
+        
 
         ScEquipableItem equipableItem = item as ScEquipableItem;
         return equipableItem != null && equipableItem.equipmentType == EquipmentType;

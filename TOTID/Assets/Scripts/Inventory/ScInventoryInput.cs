@@ -1,15 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ScInventoryInput : MonoBehaviour
 {
 
     [SerializeField] GameObject characterStatGameObject;
+    [SerializeField] GameObject characterDisplayStats;
+
+
     [SerializeField] GameObject inventoryGameObject;
+
     [SerializeField] GameObject tooltipsItem;
     [SerializeField] GameObject tooltipsStats;
+    [SerializeField] GameObject background;
     [SerializeField] KeyCode[] toggleInventoryKeys;
 
-    // Update is called once per frame
     void Update()
     {
         for(int i = 0; i < toggleInventoryKeys.Length; i++)
@@ -17,9 +22,14 @@ public class ScInventoryInput : MonoBehaviour
             if (Input.GetKeyDown(toggleInventoryKeys[i]))
             {
                 inventoryGameObject.SetActive(!inventoryGameObject.activeSelf);
-                characterStatGameObject.SetActive(!characterStatGameObject.activeSelf);
+
                 tooltipsItem.SetActive(tooltipsItem.activeSelf);
                 tooltipsStats.SetActive(tooltipsStats.activeSelf);
+                background.SetActive(!background.activeSelf);
+                #region Stats Display
+                characterDisplayStats.SetActive(!characterDisplayStats.activeSelf);
+                characterStatGameObject.SetActive(!characterStatGameObject.activeSelf);
+                #endregion
 
                 if (inventoryGameObject.activeSelf)
                 {

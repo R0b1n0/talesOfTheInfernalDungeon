@@ -4,6 +4,7 @@ using UnityEngine;
 public class ScStatsPanel : MonoBehaviour
 {
     [SerializeField] ScStatsDysplai[] statsDisplays;
+    [SerializeField] ScHealthDisplay[] statsDisplayHealth;
     [SerializeField] string[] statsName;
 
     private ScCharactereStats[] stats;
@@ -11,6 +12,7 @@ public class ScStatsPanel : MonoBehaviour
     private void OnValidate()
     {
         statsDisplays = GetComponentsInChildren<ScStatsDysplai>();
+        statsDisplayHealth = GetComponentsInChildren<ScHealthDisplay>();
         UpdateStatsName();
     }
 
@@ -18,13 +20,13 @@ public class ScStatsPanel : MonoBehaviour
     {
         stats = charStats;
         
-        if(stats.Length > statsDisplays.Length)
+        if(stats.Length > statsDisplays.Length + statsDisplayHealth.Length)
         {
             Debug.LogError("Not Enought Stat Displays");
             return;
         }
 
-        for (int i = 0; i < statsDisplays.Length; i++)
+        for (int i = 0; i < statsDisplays.Length + statsDisplayHealth.Length; i++)
         {
             statsDisplays[i].gameObject.SetActive(i < stats.Length);
 

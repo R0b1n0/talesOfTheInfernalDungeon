@@ -4,7 +4,7 @@ using UnityEngine;
 public class ScEquipmentPanel : MonoBehaviour
 {
     [SerializeField] Transform equipmentSlotsParent;
-    [SerializeField] ScEquipmentSlot[] equipmentSlots;
+    public ScEquipmentSlot[] equipmentSlots;
 
     public event Action<ScItemSlot> OnPointerExitEvent;
     public event Action<ScItemSlot> OnPointerEnterEvent;
@@ -47,6 +47,7 @@ public class ScEquipmentPanel : MonoBehaviour
         previousItem = null;
         return false;
     }
+
     public bool RemoveItem(ScEquipableItem item)
     {
         for (int i = 0; i < equipmentSlots.Length; i++)

@@ -34,6 +34,7 @@ public class ScStatsDysplai : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI valueText;
+
     [SerializeField] ScStatsToolTips toolTips;
 
     private void OnValidate()
@@ -41,6 +42,7 @@ public class ScStatsDysplai : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         TextMeshProUGUI[] texts = GetComponentsInChildren<TextMeshProUGUI>();
         nameText = texts[0];
         valueText = texts[1];
+
 
         if(toolTips == null)
             toolTips = FindObjectOfType<ScStatsToolTips>();

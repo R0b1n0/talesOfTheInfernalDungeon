@@ -7,7 +7,7 @@ using static UnityEditor.Progress;
 
 public class ScItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
 {
-    [SerializeField] Image image;
+    public Image image;
 
     public event Action<ScItemSlot> OnPointerExitEvent;
     public event Action<ScItemSlot> OnPointerEnterEvent;
@@ -78,7 +78,7 @@ public class ScItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if(OnPointerExitEvent != null) 
+        if (OnPointerExitEvent != null)
             OnPointerExitEvent(this);
     }
 

@@ -4,117 +4,119 @@ using System.Collections.ObjectModel;
 
 
 namespace CharactherStats
-{ 
-    
-    [Serializable]
-public class ScCharactereStats
 {
-    public float baseValue;
+
+    [Serializable]
+    public class ScCharactereStats
+    {
+        public float baseValue;
 
 
-    private readonly List<ScStatsModifier> statsModifiers;
-    public readonly ReadOnlyCollection<ScStatsModifier> StatsModifiers;
+        private readonly List<ScStatsModifier> statsModifiers;
+        public readonly ReadOnlyCollection<ScStatsModifier> StatsModifiers;
 
-    public virtual float Value {
-     get{
-            if (isDirty || lastBaseValue != baseValue)
+        public virtual float Value
+        {
+            get
             {
-                lastBaseValue = baseValue;
-                valueSc = CalculatedFinalValue();
-                isDirty = false;
+                if (isDirty || lastBaseValue != baseValue)
+                {
+                    lastBaseValue = baseValue;
+                    valueSc = CalculatedFinalValue();
+                    isDirty = false;
+                }
+                return valueSc;
             }
-            return valueSc;
         }
-    }
-    private bool isDirty = true;
-    private float valueSc;
-    private float lastBaseValue = float.MinValue;
+        private bool isDirty = true;
+        private float valueSc;
+        private float lastBaseValue = float.MinValue;
 
-    public ScCharactereStats()
-    {
-        statsModifiers = new List<ScStatsModifier>();
-        StatsModifiers = statsModifiers.AsReadOnly();
-    }
-
-    #region Modifier Remove and Add
-    public ScCharactereStats(float BaseValue) : this()
-    {
-        baseValue = BaseValue;
-    }
-
-    public void AddModifier(ScStatsModifier modifier)
-    {
-        isDirty = true;
-        statsModifiers.Add(modifier);
-        statsModifiers.Sort(CompareModifierOrder);
-    }
-
-    public bool RemoveModifier(ScStatsModifier modifier)
-    {
-        if (statsModifiers.Remove(modifier))
+        public ScCharactereStats()
         {
-            isDirty = true ; 
-            return true;
+            statsModifiers = new List<ScStatsModifier>();
+            StatsModifiers = statsModifiers.AsReadOnly();
         }
-        return false;
-    }
 
-    public bool RemoveAllModifiersFromSource(object source)
-    {
-        bool didRemoving = false;  
-
-        for(int i = statsModifiers.Count - 1; i >= 0 ; i--)
+        #region Modifier Remove and Add
+        public ScCharactereStats(float BaseValue) : this()
         {
-            if (statsModifiers[i].source == source)
+            baseValue = BaseValue;
+        }
+
+        public void AddModifier(ScStatsModifier modifier)
+        {
+            isDirty = true;
+            statsModifiers.Add(modifier);
+            statsModifiers.Sort(CompareModifierOrder);
+        }
+
+        public bool RemoveModifier(ScStatsModifier modifier)
+        {
+            if (statsModifiers.Remove(modifier))
             {
                 isDirty = true;
-                didRemoving = true;
-                statsModifiers.RemoveAt(i);
+                return true;
             }
+            return false;
         }
-        return didRemoving;
-    }
 
-    private int CompareModifierOrder(ScStatsModifier modifier1, ScStatsModifier modifier2)
-    {
-        if(modifier1.order < modifier2.order) {return -1;}
-        else if(modifier1.order > modifier2.order) { return 1;}
-        return 0;
-    }
-    #endregion
-    #region Calculated Modifier
-    private float CalculatedFinalValue()
-    {
-        float finalValue = baseValue;
-        float sumPercentAdd = 0;
-
-        for (int i = 0; i < statsModifiers.Count; i++)
+        public bool RemoveAllModifiersFromSource(object source)
         {
-            ScStatsModifier mod = statsModifiers[i];
+            bool didRemoving = false;
 
-            if(mod.type == StatModType.Flat)
+            for (int i = statsModifiers.Count - 1; i >= 0; i--)
             {
-                finalValue += mod.value;
-                if(i + 1 >= statsModifiers.Count || statsModifiers[i + 1].type != StatModType.PercentAdd)
+                if (statsModifiers[i].source == source)
                 {
-                    finalValue *= 1 + sumPercentAdd;
-                    sumPercentAdd = 0;
+                    isDirty = true;
+                    didRemoving = true;
+                    statsModifiers.RemoveAt(i);
                 }
-            }            
-            else if (mod.type == StatModType.PercentAdd)
-            {
-                sumPercentAdd += mod.value;
             }
-            else if (mod.type == StatModType.PercentMult)
-            {
-                finalValue *= 1 + mod.value;
-            }
-
-
+            return didRemoving;
         }
 
-        return (float)Math.Round(finalValue, 4);
+        private int CompareModifierOrder(ScStatsModifier modifier1, ScStatsModifier modifier2)
+        {
+            if (modifier1.order < modifier2.order) { return -1; }
+            else if (modifier1.order > modifier2.order) { return 1; }
+            return 0;
+        }
+        #endregion
+        #region Calculated Modifier
+        private float CalculatedFinalValue()
+        {
+            float finalValue = baseValue;
+            float sumPercentAdd = 0;
+
+            for (int i = 0; i < statsModifiers.Count; i++)
+            {
+                ScStatsModifier mod = statsModifiers[i];
+
+                if (mod.type == StatModType.Flat)
+                {
+                    finalValue += mod.value;
+                    if (i + 1 >= statsModifiers.Count || statsModifiers[i + 1].type != StatModType.PercentAdd)
+                    {
+                        finalValue *= 1 + sumPercentAdd;
+                        sumPercentAdd = 0;
+                    }
+                }
+                else if (mod.type == StatModType.PercentAdd)
+                {
+                    sumPercentAdd += mod.value;
+                }
+                else if (mod.type == StatModType.PercentMult)
+                {
+                    finalValue *= 1 + mod.value;
+                }
+
+
+            }
+
+            return (float)Math.Round(finalValue, 4);
+        }
+        #endregion
     }
-    #endregion
-}
 }

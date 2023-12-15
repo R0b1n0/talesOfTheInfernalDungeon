@@ -10,19 +10,49 @@ public class ScCharacter : MonoBehaviour
     public ScCharactereStats health;
     public ScCharactereStats a_p;
 
+    [SerializeField] Slider healthSlider;
+    [SerializeField] ScHealthBar healthBar;
+
+    public int currentHealth;
+
     [SerializeField] ScInventory inventory;
     [SerializeField] ScEquipmentPanel equipmentPanel;
     [SerializeField] ScStatsPanel statsPanel;
     [SerializeField] ScItemToolTips itemToolTips;
     [SerializeField] Image draggableItem;
 
+    [SerializeField] Image imageItemSlots;
+    [SerializeField] Image imageWeaponSlots;
+
     private ScItemSlot draggedSLot;
 
+
+    private void Start()
+    {
+        currentHealth = (int)health.Value;
+        healthBar.SetMaxHealth((int)health.Value);
+        healthSlider.maxValue = (int)health.Value;
+        healthSlider.value = currentHealth;
+    }
     private void OnValidate()
     {
         if (itemToolTips == null)
             itemToolTips = FindObjectOfType<ScItemToolTips>();
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+            takeDamage(10);
+    }
+
+    public void takeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+        healthSlider.value = currentHealth;
+    }
+
 
 
     private void Awake()
@@ -92,13 +122,13 @@ public class ScCharacter : MonoBehaviour
             draggedSLot = itemSlot;
             draggableItem.sprite = itemSlot.Item.icon;
             draggableItem.transform.position = Input.mousePosition;
-            draggableItem.enabled = true;
+            draggableItem.gameObject.SetActive(true);
         }
     }
     private void EndDrag(ScItemSlot itemSlot)
     {
         draggedSLot = null;
-        draggableItem.enabled = false;
+        draggableItem.gameObject.SetActive(false);
     }
     private void Drag(ScItemSlot itemSlot)
     {
@@ -114,13 +144,13 @@ public class ScCharacter : MonoBehaviour
             ScEquipableItem dragItem = draggedSLot.Item as ScEquipableItem;
             ScEquipableItem dropItem = dropItemSlot.Item as ScEquipableItem;
 
-            if(draggedSLot is ScEquipmentSlot)
+            if (draggedSLot is ScEquipmentSlot)
             {
                 if (dragItem != null) dragItem.Unequip(this);
                 if (dropItem != null) dropItem.Equip(this);
             }
 
-            if(dropItemSlot is ScEquipmentSlot)
+            if (dropItemSlot is ScEquipmentSlot)
             {
                 if (dragItem != null) dragItem.Equip(this);
                 if (dropItem != null) dropItem.Unequip(this);
@@ -130,6 +160,8 @@ public class ScCharacter : MonoBehaviour
             ScItem draggedItem = draggedSLot.Item;
             draggedSLot.Item = dropItemSlot.Item;
             dropItemSlot.Item = draggedItem;
+            imageItemSlots.sprite = equipmentPanel.equipmentSlots[0].image.sprite;
+            imageWeaponSlots.sprite = equipmentPanel.equipmentSlots[1].image.sprite;
 
         }
     }
