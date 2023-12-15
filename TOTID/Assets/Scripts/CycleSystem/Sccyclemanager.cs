@@ -9,10 +9,8 @@ public class Sccyclemanager : MonoBehaviour
     public static Sccyclemanager instance;
 
 
-    int ennemiAlive;
-    bool ennemiListFull = false;
-    bool playerListFull = false;
-
+    public int ennemiAlive;
+    public int answers;
     public UnityEvent ennemiActionEvent;
     public UnityEvent playerActionEvent;
 
@@ -34,37 +32,26 @@ public class Sccyclemanager : MonoBehaviour
         {
             ennemiActionEvent = new UnityEvent();
         }
-        ennemiAlive = 0;
+        playerActionEvent.Invoke();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && ennemiActionEvent != null)
+        if (answers == ennemiAlive)
         {
-            ennemiActionEvent.Invoke();
-        }
+            answers = 0;
+            playerActionEvent.Invoke();
+        }//all mobs finished their moves 
+    }
 
-        if( ennemiListFull == false )
-        {
-            // remplacer le int part un int = le nombres d'ennemis en vie
-            if (ennemiAlive == 3)
-            {
-                ennemiListFull = true;
-            }
-        }
-
-        if(playerListFull == false )
-        {
-            if (ennemiAlive == 1)
-            {
-                playerListFull = true;
-            }
-        } 
+    public void GetANewListener()
+    {
+        ennemiAlive += 1;
     }
 
     public void PlayerTurnOver()
     {
         ennemiActionEvent.Invoke();
+        answers = 0;
     }
 }

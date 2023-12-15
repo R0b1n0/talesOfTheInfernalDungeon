@@ -25,21 +25,6 @@ public class ScMovement : MonoBehaviour
         actionScript = GetComponent<ScAction>();
     }
 
-    private void Update()
-    {
-        if (path.Count > 0) 
-        {
-            if (Vector3.Distance(transform.position,path[path.Count-1].wayPointId + new Vector3(0, 1, 0)) < 0.1f)
-            {
-                previousPos = path[path.Count - 1].wayPointId;
-                currentCell = path[path.Count - 1];
-                path.Remove(path[path.Count-1]);
-                actionScript.UseOneActionPoint();
-            }
-            else
-                transform.position = Vector3.Lerp(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 50);
-        }
-    }
 
     public void SetCurrentCell(ScWayPoint myCurrentCell)
     {
@@ -62,6 +47,23 @@ public class ScMovement : MonoBehaviour
     public ScWayPoint GetCurrentCell()
     {
         return currentCell;
+    }
+    public void MoveToNextCell()
+    {
+        if (Vector3.Distance(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) < 0.1f)
+        {
+            previousPos = path[path.Count - 1].wayPointId;
+            currentCell = path[path.Count - 1];
+            path.Remove(path[path.Count - 1]);
+            actionScript.UseOneActionPoint();
+            if (path.Count == 0)
+            {
+                actionScript.CanTriggerNewAction(true);
+                actionScript.SetPlayerState(playerState.idle);
+            }
+        }
+        else
+            transform.position = Vector3.Lerp(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 50);
     }
 
     public void SetPath(List<ScWayPoint> newPath)

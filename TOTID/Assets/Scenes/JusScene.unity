@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraHolder: {fileID: 385270881}
+  maxAactionPoint: 5
 --- !u!114 &66761501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,7 +432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f3a29bcfddbf849841ec7153b74318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 2
 --- !u!4 &266757863
 Transform:
   m_ObjectHideFlags: 0
@@ -1125,8 +1125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04da330ae1d4a7343a7480d3b2681339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ennemiListener: []
-  playerListener: []
+  ennemiAlive: 0
+  answers: 0
   ennemiActionEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1418,7 +1418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f3a29bcfddbf849841ec7153b74318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
 --- !u!4 &1517375458
 Transform:
   m_ObjectHideFlags: 0

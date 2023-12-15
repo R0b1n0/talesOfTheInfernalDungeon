@@ -21,7 +21,6 @@ public class ScMob : MonoBehaviour
     private List<ScWayPoint> path = new List<ScWayPoint>();
     private Vector3 previousPos;
 
-
     protected MobState myState;
 
     private void Awake()
@@ -30,24 +29,12 @@ public class ScMob : MonoBehaviour
         myTrans = transform;
         playerMovementRef = ScMovement.Instance;
         Sccyclemanager.instance.ennemiActionEvent.AddListener(Behave);
+        Sccyclemanager.instance.GetANewListener();
     }
 
-    protected void FindFirstWayPoint()
-    {
-        Ray groundCheck = new Ray(transform.position, Vector3.down);
-        RaycastHit hit = new RaycastHit();
-        Physics.Raycast(groundCheck, out hit);
 
-        if (hit.collider != null)
-        {
-            currentCell = hit.transform.GetComponent<ScRoom>().FindClossestCell(hit.point);
-            myTrans.position = currentCell.wayPointId + new Vector3(0, 1, 0);
-        }
-    }
 
-    protected virtual void Behave() { }
-    protected virtual void Attack() { }
-    protected virtual void GetDamage() { }
+
     protected void RandomMove()
     {
         List<ScWayPoint> directNeighbors = new List<ScWayPoint>() ;
@@ -63,20 +50,45 @@ public class ScMob : MonoBehaviour
             currentCell = path[path.Count - 1];
             path.Remove(path[path.Count - 1]);
             currentActionPoint--;
-            if (currentActionPoint > 0)
-            {
-                Behave();
-            }
+            ActionEnd();
         }
         else
             myTrans.position = Vector3.Lerp(myTrans.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 50);
         
         
     }
+    protected void FindFirstWayPoint()
+    {
+        Ray groundCheck = new Ray(transform.position, Vector3.down);
+        RaycastHit hit = new RaycastHit();
+        Physics.Raycast(groundCheck, out hit);
+
+        if (hit.collider != null)
+        {
+            currentCell = hit.transform.GetComponent<ScRoom>().FindClossestCell(hit.point);
+            myTrans.position = currentCell.wayPointId + new Vector3(0, 1, 0);
+        }
+    }
+
+    protected void ActionEnd()
+    { 
+        if (currentActionPoint == 0)
+        {
+            Sccyclemanager.instance.answers++;
+        }
+        else
+        {
+            Behave();
+        }
+    }
     public void SetState(MobState newState)
     {
         myState = newState;
     }
+
+    protected virtual void Behave() { }
+    protected virtual void Attack() { }
+    protected virtual void GetDamage() { }
 }
 
 
