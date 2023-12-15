@@ -19,6 +19,7 @@ public class ScAction : MonoBehaviour
     private void Start()
     {
         movementScript = GetComponent<ScMovement>();
+        actionPoint = maxAactionPoint;
         canTriggerNewAction = true;
         mystate = playerState.idle;
         Sccyclemanager.instance.playerActionEvent.AddListener(PlayerTurnsBegin);
@@ -39,9 +40,6 @@ public class ScAction : MonoBehaviour
                     break;
             }
         }
-
-
-
     }
 
     public void ActionOnRelease()

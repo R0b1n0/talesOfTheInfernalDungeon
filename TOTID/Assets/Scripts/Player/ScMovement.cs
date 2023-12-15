@@ -63,7 +63,7 @@ public class ScMovement : MonoBehaviour
             }
         }
         else
-            transform.position = Vector3.Lerp(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 50);
+            transform.position = Vector3.Lerp(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 100);
     }
 
     public void SetPath(List<ScWayPoint> newPath)

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ScBrawler : ScMob
 {
-    private EWNode root; 
+    private EWNode root;
 
     protected override void Behave()
     {
@@ -15,29 +15,27 @@ public class ScBrawler : ScMob
 
         root.Evaluate();
 
-        switch (myState)
-        {
-            case MobState.Patrol:
-                RandomMove();
-                break;
-        }
+        
     }
 
     private void Start()
     {
         root = new EWSelector(new List<EWNode> { new ScMoveNode(this)});
-        FindFirstWayPoint();
+        
+        currentCell = FindClosestWayPoint(transform.position);
+        myTrans.position = currentCell.wayPointId + new Vector3(0, 1, 0);
+
+        CreatePatrolItinary();
     }
 
     private void Update()
     {
-        switch (myState) 
+        switch (myState)
         {
             case MobState.Patrol:
-                if (currentActionPoint > 0)
-                {
-                    MoveToNextDestination();
-                }
+                FindPatrollingItinary();
+                MoveToNextDestination();
+                ActionEnd();
                 break;
         }
     }
