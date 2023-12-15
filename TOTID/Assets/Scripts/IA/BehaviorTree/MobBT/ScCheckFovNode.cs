@@ -17,11 +17,12 @@ public class ScCheckFovNode : EWNode
 
     public override EWNodeState Evaluate()
     {
-        Debug.Log("evaluate FOV");
         if(Vector3.Distance(ScMovement.Instance.currentCell.wayPointId, mob.currentCell.wayPointId) < 20 )
-        { 
+        {
+            
             if(Vector3.Angle(mob.myTrans.forward, ScMovement.Instance.currentCell.wayPointId - mob.currentCell.wayPointId) < 45 )
             {
+                Debug.Log("playerInDistance");
                 rayToPlayer = new Ray(mob.myTrans.position, ScMovement.Instance.currentCell.wayPointId + new Vector3(0,1,0));
                 Physics.Raycast(rayToPlayer, out hitPlayer);
                 if (hitPlayer.collider!= null)
@@ -30,13 +31,13 @@ public class ScCheckFovNode : EWNode
                     {
                         Debug.Log("checkFov");
                         mob.SetState(MobState.Aggro);
-                        return EWNodeState.SUCCESS;
+                        return EWNodeState.FAILURE;
                     }
                 }
             }
         }
-        mob.SetState(MobState.Idle);
-        return EWNodeState.FAILURE;
+        mob.SetState(MobState.Patrol);
+        return EWNodeState.SUCCESS;
         
     }
 }

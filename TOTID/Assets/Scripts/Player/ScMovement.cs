@@ -10,6 +10,7 @@ public class ScMovement : MonoBehaviour
     private List<ScWayPoint> path = new List<ScWayPoint>();
     private ScAction actionScript;
     Vector3 previousPos;
+    [SerializeField] Transform feetPos;
 
     private void Awake()
     {
@@ -33,12 +34,13 @@ public class ScMovement : MonoBehaviour
 
     private void FindFIrstCell()
     {
-        Ray groundCheck = new Ray(transform.position, Vector3.down);
+        Ray groundCheck = new Ray(feetPos.position, Vector3.down);
         RaycastHit hit = new RaycastHit();
         Physics.Raycast(groundCheck, out hit);
 
         if (hit.collider != null)
         {
+            Debug.Log(hit.collider.name);
             currentCell = hit.transform.GetComponent<ScRoom>().FindClossestCell(hit.point);
             transform.position = currentCell.wayPointId + new Vector3(0, 1, 0);
         }

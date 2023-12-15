@@ -20,7 +20,7 @@ public class ScBrawler : ScMob
 
     private void Start()
     {
-        root = new EWSelector(new List<EWNode> { new ScMoveNode(this)});
+        root = new EWSequence(new List<EWNode>  {new ScCheckFovNode(this), new ScMoveNode(this)});
         
         currentCell = FindClosestWayPoint(transform.position);
         myTrans.position = currentCell.wayPointId + new Vector3(0, 1, 0);
