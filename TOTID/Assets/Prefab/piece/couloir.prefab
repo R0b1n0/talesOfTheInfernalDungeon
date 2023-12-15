@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 0.1, z: 10}
+  m_LocalScale: {x: 2, y: 0.1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 563948505733737330}
@@ -133,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 2848582089377864635}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.375, y: 1.55, z: 0}
+  m_LocalPosition: {x: 2.125, y: 1.55, z: 0}
   m_LocalScale: {x: 0.25, y: 3, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -236,7 +236,7 @@ Transform:
   m_GameObject: {fileID: 6131526023892658600}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.64878505, z: -0, w: 0.7609717}
-  m_LocalPosition: {x: 2.1214693, y: 1.8357866, z: -2.3530016}
+  m_LocalPosition: {x: 1.9162424, y: 1.7622806, z: -2.3530016}
   m_LocalScale: {x: 6.219038, y: 7.092191, z: 6.219038}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -328,7 +328,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6478060798554011856}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -48.638344, y: 0, z: -45.30981}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -340,7 +340,7 @@ Transform:
   - {fileID: 6621636638563216641}
   - {fileID: 835561425905871160}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &7473524041417607910
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ Transform:
   m_GameObject: {fileID: 7473524041417607910}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.375, y: 1.55, z: 0}
+  m_LocalPosition: {x: -0.125, y: 1.55, z: 0}
   m_LocalScale: {x: 0.25, y: 3, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -459,6 +459,10 @@ PrefabInstance:
       value: 'sol couloir '
       objectReference: {fileID: 0}
     - target: {fileID: 6801727960173203573, guid: be5a70012f86e5e4cab2c12148f77de0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801727960173203573, guid: be5a70012f86e5e4cab2c12148f77de0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
       objectReference: {fileID: 0}
@@ -522,7 +526,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1215762637680820570, guid: fec2c0998b3e5e341a435e51373fb12f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.207
+      value: 1.967
       objectReference: {fileID: 0}
     - target: {fileID: 1215762637680820570, guid: fec2c0998b3e5e341a435e51373fb12f, type: 3}
       propertyPath: m_LocalPosition.y
