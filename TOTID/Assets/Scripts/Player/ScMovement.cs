@@ -5,9 +5,12 @@ using UnityEngine;
 public class ScMovement : MonoBehaviour
 {
     public static ScMovement Instance;
-    private ScWayPoint currentCell;
+
+    public ScWayPoint currentCell;
     private List<ScWayPoint> path = new List<ScWayPoint>();
+    private ScAction actionScript;
     Vector3 previousPos;
+    [SerializeField] Transform feetPos;
 
     private void Awake()
     {
@@ -20,22 +23,9 @@ public class ScMovement : MonoBehaviour
     private void Start()
     {
         FindFIrstCell();
+        actionScript = GetComponent<ScAction>();
     }
 
-    private void Update()
-    {
-        if (path.Count > 0) 
-        {
-            if (Vector3.Distance(transform.position,path[path.Count-1].wayPointId + new Vector3(0, 1, 0)) < 0.1f)
-            {
-                previousPos = path[path.Count - 1].wayPointId;
-                currentCell = path[path.Count - 1];
-                path.Remove(path[path.Count-1]);
-            }
-            else
-                transform.position = Vector3.Lerp(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 50);
-        }
-    }
 
     public void SetCurrentCell(ScWayPoint myCurrentCell)
     {
@@ -44,12 +34,13 @@ public class ScMovement : MonoBehaviour
 
     private void FindFIrstCell()
     {
-        Ray groundCheck = new Ray(transform.position, Vector3.down);
+        Ray groundCheck = new Ray(feetPos.position, Vector3.down);
         RaycastHit hit = new RaycastHit();
         Physics.Raycast(groundCheck, out hit);
 
         if (hit.collider != null)
         {
+            Debug.Log(hit.collider.name);
             currentCell = hit.transform.GetComponent<ScRoom>().FindClossestCell(hit.point);
             transform.position = currentCell.wayPointId + new Vector3(0, 1, 0);
         }
@@ -58,6 +49,23 @@ public class ScMovement : MonoBehaviour
     public ScWayPoint GetCurrentCell()
     {
         return currentCell;
+    }
+    public void MoveToNextCell()
+    {
+        if (Vector3.Distance(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) < 0.1f)
+        {
+            previousPos = path[path.Count - 1].wayPointId;
+            currentCell = path[path.Count - 1];
+            path.Remove(path[path.Count - 1]);
+            actionScript.UseOneActionPoint();
+            if (path.Count == 0)
+            {
+                actionScript.CanTriggerNewAction(true);
+                actionScript.SetPlayerState(playerState.idle);
+            }
+        }
+        else
+            transform.position = Vector3.Lerp(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 100);
     }
 
     public void SetPath(List<ScWayPoint> newPath)
