@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScAction : MonoBehaviour
 {
     [SerializeField] Transform cameraHolder;
-    [SerializeField] private int maxAactionPoint;
+    [SerializeField] private int maxActionPoint;
 
 
     private ScMovement movementScript;
@@ -19,7 +19,7 @@ public class ScAction : MonoBehaviour
     private void Start()
     {
         movementScript = GetComponent<ScMovement>();
-        actionPoint = maxAactionPoint;
+        actionPoint = maxActionPoint;
         canTriggerNewAction = true;
         mystate = playerState.idle;
         Sccyclemanager.instance.playerActionEvent.AddListener(PlayerTurnsBegin);
@@ -87,7 +87,7 @@ public class ScAction : MonoBehaviour
 
     private void PlayerTurnsBegin()
     {
-        actionPoint = maxAactionPoint;
+        actionPoint = maxActionPoint;
     }
 }
 
