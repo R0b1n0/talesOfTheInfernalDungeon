@@ -32,6 +32,9 @@ public class ScGps
         path.Clear();
         CreatPath(closed[destination.wayPointId]);
 
+        if (path.Count>1)
+            path.Remove(path[path.Count - 1]);
+
         return path;
     }
     private void EvaluateNode()
@@ -108,7 +111,6 @@ public class ScGps
     {
         return Vector3.Distance(destination.wayPointId, nodeToEvaluate.wayPointId);
     }
-
     private void CreatPath(Node nodeToAdd)
     {
         path.Add(nodeToAdd.nodeId);
