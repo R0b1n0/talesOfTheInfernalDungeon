@@ -2,17 +2,16 @@ using UnityEngine;
 using CharactherStats;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ScCharacter : MonoBehaviour
 {
-
-    public ScCharactereStats strength;
-    public ScCharactereStats health;
+    [SerializeField] List<ScCharacterData> characterData = new List<ScCharacterData>();
     public ScCharactereStats a_p;
 
     [SerializeField] Slider healthSlider;
     [SerializeField] ScHealthBar healthBar;
-
+    
     public int currentHealth;
 
     [SerializeField] ScInventory inventory;
@@ -21,17 +20,17 @@ public class ScCharacter : MonoBehaviour
     [SerializeField] ScItemToolTips itemToolTips;
     [SerializeField] Image draggableItem;
 
-    [SerializeField] Image imageItemSlots;
-    [SerializeField] Image imageWeaponSlots;
 
     private ScItemSlot draggedSLot;
+    private int characterIndex;
 
 
     private void Start()
     {
-        currentHealth = (int)health.Value;
-        healthBar.SetMaxHealth((int)health.Value);
-        healthSlider.maxValue = (int)health.Value;
+        characterIndex = 0;
+        currentHealth = (int)characterData[characterIndex].health.Value;
+        healthBar.SetMaxHealth((int)characterData[characterIndex].health.Value);
+        healthSlider.maxValue = (int)characterData[characterIndex].health.Value;
         healthSlider.value = currentHealth;
     }
     private void OnValidate()
@@ -57,13 +56,13 @@ public class ScCharacter : MonoBehaviour
 
     private void Awake()
     {
-        statsPanel.SetStats(strength, health, a_p);
+        statsPanel.SetStats(characterData[characterIndex].strength, characterData[characterIndex].health, a_p);
         statsPanel.UpdateStatsValue();
 
         // Setup Events:
         // Right Click
         inventory.OnRightClickEvent += Equip;
-        equipmentPanel.OnRightClickEvent += Unequip;
+        equipmentPanel.OnRightClickEvent += UnequipItemSlot;
         // Pointer Enter
         inventory.OnPointerEnterEvent += ShowTooltip;
         equipmentPanel.OnPointerEnterEvent += ShowTooltip;
@@ -93,7 +92,7 @@ public class ScCharacter : MonoBehaviour
         }
     }
 
-    private void Unequip(ScItemSlot itemSlot)
+    private void UnequipItemSlot(ScItemSlot itemSlot)
     {
         ScEquipableItem equipableItem = itemSlot.Item as ScEquipableItem;
         if ((equipableItem != null))
@@ -146,22 +145,22 @@ public class ScCharacter : MonoBehaviour
 
             if (draggedSLot is ScEquipmentSlot)
             {
-                if (dragItem != null) dragItem.Unequip(this);
-                if (dropItem != null) dropItem.Equip(this);
+                if (dragItem != null) dragItem.Unequip(characterData[characterIndex]);
+                if (dropItem != null) dropItem.Equip(characterData[characterIndex]);
             }
 
             if (dropItemSlot is ScEquipmentSlot)
             {
-                if (dragItem != null) dragItem.Equip(this);
-                if (dropItem != null) dropItem.Unequip(this);
+                if (dragItem != null) dragItem.Equip(characterData[characterIndex]);
+                if (dropItem != null) dropItem.Unequip(characterData[characterIndex]);
             }
             statsPanel.UpdateStatsValue();
 
             ScItem draggedItem = draggedSLot.Item;
             draggedSLot.Item = dropItemSlot.Item;
             dropItemSlot.Item = draggedItem;
-            imageItemSlots.sprite = equipmentPanel.equipmentSlots[0].image.sprite;
-            imageWeaponSlots.sprite = equipmentPanel.equipmentSlots[1].image.sprite;
+            characterData[characterIndex].item.sprite = equipmentPanel.equipmentSlots[0].image.sprite;
+            characterData[characterIndex].weapon.sprite = equipmentPanel.equipmentSlots[1].image.sprite;
 
         }
     }
@@ -176,10 +175,10 @@ public class ScCharacter : MonoBehaviour
                 if (previousItem != null)
                 {
                     inventory.AddItem(previousItem);
-                    previousItem.Unequip(this);
+                    previousItem.Unequip(characterData[characterIndex]);
                     statsPanel.UpdateStatsValue();
                 }
-                item.Equip(this);
+                item.Equip(characterData[characterIndex]);
                 statsPanel.UpdateStatsValue();
             }
             else
@@ -193,9 +192,11 @@ public class ScCharacter : MonoBehaviour
     {
         if (!inventory.IsFull() && equipmentPanel.RemoveItem(item))
         {
-            item.Unequip(this);
+            item.Unequip(characterData[characterIndex]);
             statsPanel.UpdateStatsValue();
             inventory.AddItem(item);
+            
+
         }
     }
 }

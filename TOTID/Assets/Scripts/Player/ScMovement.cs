@@ -7,6 +7,8 @@ public class ScMovement : MonoBehaviour
     public static ScMovement Instance;
 
     public ScWayPoint currentCell;
+    [SerializeField] LayerMask playerCollMask;
+    [SerializeField] Collider playerCollider;
     private List<ScWayPoint> path = new List<ScWayPoint>();
     private ScAction actionScript;
     Vector3 previousPos;
@@ -34,17 +36,17 @@ public class ScMovement : MonoBehaviour
 
     private void FindFIrstCell()
     {
-        Ray groundCheck = new Ray(feetPos.position, Vector3.down);
+        Ray groundCheck = new Ray(feetPos.position, -Vector3.up);
         RaycastHit hit = new RaycastHit();
-        Physics.Raycast(groundCheck, out hit);
 
-        if (hit.collider != null)
-        {
-            Debug.Log(hit.collider.name);
-            currentCell = hit.transform.GetComponent<ScRoom>().FindClossestCell(hit.point);
-            transform.position = currentCell.wayPointId + new Vector3(0, 1, 0);
-        }
+        Physics.Raycast(groundCheck, out hit, 3, ~playerCollMask);
+
+ 
+        currentCell = hit.transform.GetComponent<ScRoom>().FindClossestCell(transform.position);
+        transform.position = currentCell.wayPointId + new Vector3(0, 1, 0);
+        playerCollider.enabled = true;
     }
+
 
     public ScWayPoint GetCurrentCell()
     {

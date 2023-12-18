@@ -14,7 +14,6 @@ public class ScMoveNode : EWNode
 
     public override EWNodeState Evaluate()
     {
-        Debug.Log("Move");
         mob.SetState( MobState.Patrol );
         return EWNodeState.FAILURE;
     }
