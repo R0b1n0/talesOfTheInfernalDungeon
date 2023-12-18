@@ -1,0 +1,34 @@
+{
+    "name": "Change",
+    "maps": [
+        {
+            "name": "Selection",
+            "id": "62e2deef-c021-4fb2-96f9-a2b1a783e45c",
+            "actions": [
+                {
+                    "name": "Slecting",
+                    "type": "Button",
+                    "id": "37d7fbc7-ad89-428b-8af7-7e5db551fd9a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f34fdd90-0132-42dd-83f7-528150dd0443",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slecting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
