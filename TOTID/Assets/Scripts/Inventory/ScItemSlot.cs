@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
 
 
 public class ScItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
@@ -41,6 +40,8 @@ public class ScItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             if (_item == null)
             {
                 image.color = disableColor;
+                image.sprite = null;
+
             }
             else
             {

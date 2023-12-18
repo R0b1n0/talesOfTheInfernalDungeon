@@ -17,7 +17,7 @@ public class ScEquipableItem : ScItem
     [Space]
     public EquipmentType equipmentType;
 
-    public void Equip(ScCharacter c)
+    public void Equip(ScCharacterData c)
     {
         if(strengthBonus != 0)
         {
@@ -38,7 +38,7 @@ public class ScEquipableItem : ScItem
         }
     }
 
-    public void Unequip(ScCharacter c)
+    public void Unequip(ScCharacterData c)
     {
         c.strength.RemoveAllModifiersFromSource(this);
         c.health.RemoveAllModifiersFromSource(this);

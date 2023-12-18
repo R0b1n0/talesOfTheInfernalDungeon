@@ -15,15 +15,21 @@ public class ScBrawler : ScMob
 
         root.Evaluate();
 
-        
+        if (myState == MobState.Aggro)
+        {
+            FindPlayer();
+        }
     }
 
     private void Start()
     {
-        root = new EWSequence(new List<EWNode>  {new ScCheckFovNode(this), new ScMoveNode(this)});
+        root = new EWSelector(new List<EWNode>  {
+                new ScBtBrawlAttack(this),
+                new EWSelector(new List<EWNode> {new ScCheckFovNode(this), new ScHasAgrro(this)}), 
+                new ScMoveNode(this)});
         
         currentCell = FindClosestWayPoint(transform.position);
-        myTrans.position = currentCell.wayPointId + new Vector3(0, 1, 0);
+        myTrans.position = currentCell.wayPointId;
 
         CreatePatrolItinary();
     }
@@ -38,15 +44,10 @@ public class ScBrawler : ScMob
                 ActionEnd();
                 break;
             case MobState.Aggro:
-                ChasePlayer();
                 MoveToNextDestination();
-                if(Vector3.Distance(ScMovement.Instance.currentCell.wayPointId, currentCell.wayPointId) > 30)
-                {
-                    SetState(MobState.Idle);
-                }
                 ActionEnd();
                 break;
-            case MobState.Attack:  
+            case MobState.Attack:
                 break;
         }
     }

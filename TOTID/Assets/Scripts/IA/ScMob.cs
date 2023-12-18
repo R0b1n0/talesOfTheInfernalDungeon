@@ -5,58 +5,90 @@ using UnityEngine;
 
 public class ScMob : MonoBehaviour
 {
-    
-    public int hp;
-    public int maxActionPoint;
+    [Header("Mob Parameters")]
+    [SerializeField] protected int hp;
+    [SerializeField] protected int maxActionPoint;
+    [SerializeField] public float fovMaxAngle;
+    [SerializeField] public float agroDistance;
+    [SerializeField] public float looseAgroDistance;
+    [SerializeField] protected float patrolingSpeed; // !!! The higher this value is, the slower the mob will move 
+    [SerializeField] protected float agroSpeed;     // !!! The higher this value is, the slower the mob will move
     [SerializeField] List<Transform> partolWayPos = new List<Transform>();
-    protected int currentActionPoint;
+    [SerializeField] private ScSpriteTurn facePlayer;
+    [SerializeField] private Sprite face;
+    [SerializeField] private Sprite dos;
 
-    protected ScMovement playerMovementRef;
+    [Header("Do not change")]
     public Transform myTrans;
-    protected ScGps myGps = new ScGps();
-
-    protected ScMoveNode scMoveNode ;
-
     public ScWayPoint currentCell;
+    [SerializeField] public Transform eyesPos;
+    [SerializeField] SpriteRenderer myRenderer;
+    
+
+    protected int currentActionPoint;
+    protected MobState myState;
+    protected ScMovement playerMovementRef;
+    protected ScGps myGps = new ScGps();
     protected ScWayPoint nextCell;
+
+
     private List<ScWayPoint> path = new List<ScWayPoint>();
     private List<ScWayPoint> patrolWayPoint = new List<ScWayPoint>();
     private Vector3 previousPos;
     private int currentPatrolBranch;
+    private float onMoveLerp;
+    private ScWayPoint playerPreviousCell = null;
+    
 
-    protected MobState myState;
 
     private void Awake()
     {
-        myState = MobState.Idle;
+        SetState(MobState.Idle);
         myTrans = transform;
         playerMovementRef = ScMovement.Instance;
         Sccyclemanager.instance.ennemiActionEvent.AddListener(Behave);
         Sccyclemanager.instance.GetANewListener();
-
-        
     }
 
     protected void MoveToNextDestination()
     {
         if (path.Count > 0)
         {
-            if (Vector3.Distance(myTrans.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) < 0.1f)
+            if (Vector3.Distance(myTrans.position, path[path.Count - 1].wayPointId) < 0.1f)
             {
+                
                 previousPos = path[path.Count - 1].wayPointId;
+                
                 currentCell = path[path.Count - 1];
+                
                 path.Remove(path[path.Count - 1]);
+                myRenderer.flipX = !myRenderer.flipX;
                 currentActionPoint--;
             }
             else      
             {
-                myTrans.position = Vector3.Lerp(myTrans.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 50);
-                myTrans.forward = (path[path.Count - 1].wayPointId - currentCell.wayPointId);
+                onMoveLerp = Vector3.Distance(previousPos, path[path.Count - 1].wayPointId);
+
+                if (myState == MobState.Aggro)
+                    myTrans.position = Vector3.Lerp(myTrans.position, path[path.Count - 1].wayPointId, onMoveLerp *agroSpeed *Time.deltaTime);
+                else
+                {
+                    myTrans.position = Vector3.Lerp(myTrans.position, path[path.Count - 1].wayPointId, onMoveLerp * patrolingSpeed * Time.deltaTime);
+                    myTrans.forward = (path[path.Count - 1].wayPointId - currentCell.wayPointId);
+                }
+
+                if (Vector3.Angle(myTrans.forward, ScMovement.Instance.currentCell.wayPointId - currentCell.wayPointId) > 90)
+                {
+                    myRenderer.sprite = dos;
+                }
+                else
+                {
+                    myRenderer.sprite = face;
+                }
             }
         }
-        
-
     }
+
     protected ScWayPoint FindClosestWayPoint(Vector3 pos)
     {
         Ray groundCheck = new Ray(pos, Vector3.down);
@@ -80,11 +112,13 @@ public class ScMob : MonoBehaviour
         if(path.Count == 0)
         {
             currentPatrolBranch++;
+            Debug.Log("new branch ");
 
             if (currentPatrolBranch > (patrolWayPoint.Count - 1))
                 currentPatrolBranch = 0;
 
             path = myGps.FindPath(currentCell, patrolWayPoint[currentPatrolBranch]);
+            Debug.Log(path.Count);
         }
     }
     protected void CreatePatrolItinary()
@@ -98,16 +132,13 @@ public class ScMob : MonoBehaviour
 
     protected void FindPlayer()
     {
-        if(path.Count == 0)
+        if (ScMovement.Instance.currentCell != playerPreviousCell)
         {
+            playerPreviousCell = ScMovement.Instance.currentCell;
+            path.Clear();
             path = myGps.FindPath(currentCell, ScMovement.Instance.currentCell);
-            path.Remove(path[0]);
+            path.RemoveAt(0);
         }
-    }
-
-    protected void ChasePlayer()
-    {
-        
     }
 
 
@@ -129,14 +160,23 @@ public class ScMob : MonoBehaviour
         {
             path.Clear();
         }
+
         myState = newState;
+
+        if (myState == MobState.Attack || myState == MobState.Aggro)
+            facePlayer.enabled = true;
+        else 
+            facePlayer.enabled = false;
     }
+    public MobState GetState()
+    {
+        return myState;
+    }
+
 
     protected virtual void Behave() { }
     protected virtual void Attack() { }
     protected virtual void GetDamage() { }
-
-
 }
 
 
