@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8811991070413265768}
   - component: {fileID: 6933794021865826411}
   - component: {fileID: 2359212323269617377}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: plafond salle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

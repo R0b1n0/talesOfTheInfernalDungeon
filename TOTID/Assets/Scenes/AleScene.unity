@@ -24079,6 +24079,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 511041858}
+  - component: {fileID: 511041859}
   m_Layer: 0
   m_Name: ' map tuto prete a jouer '
   m_TagString: Untagged
@@ -24358,6 +24359,22 @@ Transform:
   - {fileID: 927421129}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &511041859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511041857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed5ee61be066874daccec891f35057d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomCount: 0
+  getYourNeighbors:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &512600083
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -41,7 +41,7 @@ public class ScMovement : MonoBehaviour
 
         Physics.Raycast(groundCheck, out hit, 3, ~playerCollMask);
 
- 
+
         currentCell = hit.transform.GetComponent<ScRoom>().FindClossestCell(transform.position);
         transform.position = currentCell.wayPointId + new Vector3(0, 1, 0);
         playerCollider.enabled = true;

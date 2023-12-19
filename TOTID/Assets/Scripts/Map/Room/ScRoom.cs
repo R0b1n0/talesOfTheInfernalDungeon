@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
@@ -14,7 +15,8 @@ public class ScRoom : MonoBehaviour
 
     [SerializeField] float cellSize; //always set a whole number value, this was set as a float to avoid float casting
     [SerializeField] float yOffset;
-    [SerializeField] GameObject eedededed;
+    [SerializeField] LayerMask roof;
+
 
     [SerializeField]List<neighborRoom> neihborRooms = new List<neighborRoom>();
 
@@ -57,7 +59,11 @@ public class ScRoom : MonoBehaviour
             if (resultWayPoint != null)
                 break;
         }
-        return resultWayPoint;
+
+        if (resultWayPoint == null)
+            return myGraph[0][0];
+        else 
+            return resultWayPoint;
     }
 
     #region mapping
@@ -76,14 +82,12 @@ public class ScRoom : MonoBehaviour
                 Vector3 underGround = new Vector3(xOffset, myTrans.position.y + (myTrans.localScale.y / 2) - yOffset  , zOffset + cellSize*j);
                 Ray ray = new Ray(underGround, Vector3.up);
 
-                if (!Physics.Raycast(ray))
+                if (!Physics.Raycast(ray, 100))
                 {
                     Vector3 newWayPointPos = new Vector3(xOffset, myTrans.position.y + (myTrans.localScale.y / 2), zOffset + cellSize * j);
                     
                     ScWayPoint newWayPoint = new ScWayPoint(newWayPointPos);
                     myGraph[myGraph.Count - 1].Add(newWayPoint);
-
-                    Instantiate(eedededed, newWayPointPos, Quaternion.identity);
                 }
                 else
                 {
