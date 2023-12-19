@@ -27,7 +27,6 @@ public class ScAttack : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            slash.Play();
             raytoIA = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (ScMovement.Instance.currentCell.GetAllNeighbors().Contains(mob.currentCell))
             {
@@ -40,7 +39,7 @@ public class ScAttack : MonoBehaviour
                             //slash.transform.position = this.transform.position;
                             actionScript.UseOneActionPoint();
                             mob.hp -= 10;
-                            //slash.Play();
+                            slash.Play();
                         }
                         
                     }
