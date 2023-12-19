@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ScInventoryInput : MonoBehaviour
 {
-
     [SerializeField] GameObject characterStatGameObject;
     [SerializeField] GameObject characterDisplayStats;
 
@@ -15,9 +17,10 @@ public class ScInventoryInput : MonoBehaviour
     [SerializeField] GameObject background;
     [SerializeField] KeyCode[] toggleInventoryKeys;
 
+
     void Update()
     {
-        for(int i = 0; i < toggleInventoryKeys.Length; i++)
+        for (int i = 0; i < toggleInventoryKeys.Length; i++)
         {
             if (Input.GetKeyDown(toggleInventoryKeys[i]))
             {
@@ -49,7 +52,7 @@ public class ScInventoryInput : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-    }    
+    }
     public void HideMouseCursor()
     {
         Cursor.visible = false;
