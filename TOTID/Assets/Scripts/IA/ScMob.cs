@@ -1,3 +1,4 @@
+using CharactherStats;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +31,7 @@ public class ScMob : MonoBehaviour
     protected ScMovement playerMovementRef;
     protected ScGps myGps = new ScGps();
     protected ScWayPoint nextCell;
+    protected ScCharacterData characterData;
 
 
     private List<ScWayPoint> path = new List<ScWayPoint>();
@@ -141,7 +143,10 @@ public class ScMob : MonoBehaviour
         }
     }
 
-
+    protected void AttackPlayer()
+    {
+       
+    }
     protected void ActionEnd()
     { 
         if (currentActionPoint == 0)

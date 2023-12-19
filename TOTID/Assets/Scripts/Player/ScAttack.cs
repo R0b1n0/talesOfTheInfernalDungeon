@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,32 +6,47 @@ using UnityEngine;
 public class ScAttack : MonoBehaviour
 {
     private int damage;
-
+    private ScAction actionScript;
+    [SerializeField]
+    private ParticleSystem slash;
     public ScMob mob;
     Ray raytoIA;
     RaycastHit hitIA = new RaycastHit();
+    [SerializeField]
+ 
     private ScMovement movementScript;
     private void Start()
     {
         movementScript = GetComponent<ScMovement>();
-
+        actionScript =  GetComponent<ScAction>();
+        //slash = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-            raytoIA = new Ray(Vector3.forward, this.transform.position + new Vector3(0, 1, 0));
-            if (Physics.Raycast(raytoIA, out hitIA))
+        if(Input.GetMouseButtonDown(0))
+        {
+            slash.Play();
+            raytoIA = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (ScMovement.Instance.currentCell.GetAllNeighbors().Contains(mob.currentCell))
             {
-                Debug.Log(hitIA.collider);
-                if (ScMovement.Instance.currentCell.GetAllNeighbors().Contains(mob.currentCell))
+                if (Physics.Raycast(raytoIA, out hitIA))
                 {
-                    Debug.Log("IACLOSE");
                     if (hitIA.collider != null)
                     {
-                        mob.hp -= 10;
+                        if(mob.hp >= 0 )
+                        {
+                            //slash.transform.position = this.transform.position;
+                            actionScript.UseOneActionPoint();
+                            mob.hp -= 10;
+                            //slash.Play();
+                        }
+                        
                     }
                 }
             }
+        }
+            
     }
 }
