@@ -12,7 +12,11 @@ public class ScMovement : MonoBehaviour
     public List<ScWayPoint> path = new List<ScWayPoint>();
     private ScAction actionScript;
     Vector3 previousPos;
+    private Transform myTrans;
     [SerializeField] Transform feetPos;
+
+    LineRenderer linePath;
+    public List<Vector3> pathPositions = new List<Vector3>();
 
     private void Awake()
     {
@@ -24,8 +28,10 @@ public class ScMovement : MonoBehaviour
 
     private void Start()
     {
+        linePath = GetComponent<LineRenderer>();
         FindFIrstCell();
         actionScript = GetComponent<ScAction>();
+        myTrans = transform;
     }
 
 
@@ -60,18 +66,43 @@ public class ScMovement : MonoBehaviour
             currentCell = path[path.Count - 1];
             path.Remove(path[path.Count - 1]);
             actionScript.UseOneActionPoint();
+            pathPositions.RemoveAt(pathPositions.Count-1);
+            linePath.positionCount = pathPositions.Count;
             if (path.Count == 0)
             {
+                ResetLine();
                 actionScript.CanTriggerNewAction(true);
                 actionScript.SetPlayerState(playerState.idle);
             }
         }
         else
-            transform.position = Vector3.Lerp(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 100);
+        {
+            DrawLine();
+            myTrans.position = Vector3.Lerp(myTrans.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0), Vector3.Distance(previousPos, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) / 100);
+        }
+           
     }
 
     public void SetPath(List<ScWayPoint> newPath)
     {
         path = newPath;
+
+        for (int i = 0; i < path.Count; i++) {
+            pathPositions.Add(path[i].wayPointId + new Vector3(0,0.4f,0));
+        }
+        pathPositions.Add(currentCell.wayPointId + new Vector3(0, 0.4f, 0));
+    }
+
+    public void ResetLine() {
+        linePath.positionCount = 0;
+        pathPositions.Clear();
+    }
+
+    public void DrawLine () {
+        linePath.positionCount = pathPositions.Count;
+        linePath.SetPosition(linePath.positionCount-1, myTrans.position);
+        for (int u=0; u<pathPositions.Count; u++) { 
+            linePath.SetPosition(u, pathPositions[u]);
+        }
     }
 }
