@@ -1,14 +1,20 @@
 using System.Text;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class ScItemToolTips : MonoBehaviour
 {
     [SerializeField] Text ItemNameText;
     [SerializeField] Text ItemSlotText;
     [SerializeField] Text ItemStatsText;
+    [SerializeField] GameObject toolTipsItem;
+
 
     private StringBuilder sb = new StringBuilder();
+
+
 
     public void ShowToolTip(ScEquipableItem item)
     {
@@ -23,12 +29,16 @@ public class ScItemToolTips : MonoBehaviour
 
         ItemStatsText.text = sb.ToString();
 
-        gameObject.SetActive(true);
+        toolTipsItem.SetActive(true);
+
+
     }
+
+
 
     public void HideToolTips()
     {
-        gameObject.SetActive(false);
+        toolTipsItem.SetActive(false);
     }
 
     public void AddStat(float value, string statsName, bool isPercent = false)

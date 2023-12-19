@@ -3,36 +3,36 @@ using CharactherStats;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class ScCharacter : MonoBehaviour
 {
     [SerializeField] List<ScCharacterData> characterData = new List<ScCharacterData>();
+    [Space]
     public ScCharactereStats a_p;
 
-    [SerializeField] Slider healthSlider;
-    [SerializeField] ScHealthBar healthBar;
-    
-    public int currentHealth;
-
+    [SerializeField] List<ScEquipmentPanel> characterEquipements = new List<ScEquipmentPanel>();
+    [Space]
     [SerializeField] ScInventory inventory;
-    [SerializeField] ScEquipmentPanel equipmentPanel;
     [SerializeField] ScStatsPanel statsPanel;
     [SerializeField] ScItemToolTips itemToolTips;
     [SerializeField] Image draggableItem;
+
+    [Space]
+    [SerializeField] Image faceShoot;
+
+    [Space]
+    public TextMeshProUGUI playerName;
 
 
     private ScItemSlot draggedSLot;
     private int characterIndex;
 
-
-    private void Start()
+    private void Awake()
     {
-        characterIndex = 0;
-        currentHealth = (int)characterData[characterIndex].health.Value;
-        healthBar.SetMaxHealth((int)characterData[characterIndex].health.Value);
-        healthSlider.maxValue = (int)characterData[characterIndex].health.Value;
-        healthSlider.value = currentHealth;
+        UpdateUiInfo();
     }
+
     private void OnValidate()
     {
         if (itemToolTips == null)
@@ -47,48 +47,60 @@ public class ScCharacter : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
-        healthSlider.value = currentHealth;
+        characterData[characterIndex].TakeDamage(damage);
     }
 
 
 
-    private void Awake()
+    public void NextPlayer(int indexValue)
     {
+        characterIndex = indexValue;
+        UpdateUiInfo();
+    }
+
+
+    private void UpdateUiInfo()
+    {
+        faceShoot.sprite = characterData[characterIndex].faceShoot.sprite;
+
+        playerName.text = characterData[characterIndex].playerName;
+
         statsPanel.SetStats(characterData[characterIndex].strength, characterData[characterIndex].health, a_p);
         statsPanel.UpdateStatsValue();
 
         // Setup Events:
         // Right Click
         inventory.OnRightClickEvent += Equip;
-        equipmentPanel.OnRightClickEvent += UnequipItemSlot;
+        characterEquipements[characterIndex].OnRightClickEvent += UnequipItemSlot;
         // Pointer Enter
         inventory.OnPointerEnterEvent += ShowTooltip;
-        equipmentPanel.OnPointerEnterEvent += ShowTooltip;
+        characterEquipements[characterIndex].OnPointerEnterEvent += ShowTooltip;
         // Pointer Exit
         inventory.OnPointerExitEvent += HideTooltip;
-        equipmentPanel.OnPointerExitEvent += HideTooltip;
+        characterEquipements[characterIndex].OnPointerExitEvent += HideTooltip;
         // Begin Drag
         inventory.OnBeginDragEvent += BeginDrag;
-        equipmentPanel.OnBeginDragEvent += BeginDrag;
+        characterEquipements[characterIndex].OnBeginDragEvent += BeginDrag;
         // End Drag
         inventory.OnEndDragEvent += EndDrag;
-        equipmentPanel.OnEndDragEvent += EndDrag;
+        characterEquipements[characterIndex].OnEndDragEvent += EndDrag;
         // Drag
         inventory.OnDragEvent += Drag;
-        equipmentPanel.OnDragEvent += Drag;
+        characterEquipements[characterIndex].OnDragEvent += Drag;
         // Drop
         inventory.OnDropEvent += Drop;
-        equipmentPanel.OnDropEvent += Drop;
+        characterEquipements[characterIndex].OnDropEvent += Drop;
     }
 
+    #region equip unequip
     private void Equip(ScItemSlot itemSlot)
     {
         ScEquipableItem equipableItem = itemSlot.Item as ScEquipableItem;
         if ((equipableItem != null))
         {
             Equip(equipableItem);
+            characterData[characterIndex].SetItem(characterEquipements[characterIndex].equipmentSlots[0].image.sprite);
+            characterData[characterIndex].SetWeapon(characterEquipements[characterIndex].equipmentSlots[1].image.sprite);
         }
     }
 
@@ -98,6 +110,8 @@ public class ScCharacter : MonoBehaviour
         if ((equipableItem != null))
         {
             Unequip(equipableItem);
+            characterData[characterIndex].SetItem(characterEquipements[characterIndex].equipmentSlots[0].image.sprite);
+            characterData[characterIndex].SetWeapon(characterEquipements[characterIndex].equipmentSlots[1].image.sprite);
         }
     }
 
@@ -159,9 +173,8 @@ public class ScCharacter : MonoBehaviour
             ScItem draggedItem = draggedSLot.Item;
             draggedSLot.Item = dropItemSlot.Item;
             dropItemSlot.Item = draggedItem;
-            characterData[characterIndex].item.sprite = equipmentPanel.equipmentSlots[0].image.sprite;
-            characterData[characterIndex].weapon.sprite = equipmentPanel.equipmentSlots[1].image.sprite;
-
+            characterData[characterIndex].SetItem(characterEquipements[characterIndex].equipmentSlots[0].image.sprite);
+            characterData[characterIndex].SetWeapon(characterEquipements[characterIndex].equipmentSlots[1].image.sprite);
         }
     }
 
@@ -170,7 +183,7 @@ public class ScCharacter : MonoBehaviour
         if (inventory.RemoveItem(item))
         {
             ScEquipableItem previousItem;
-            if (equipmentPanel.AddItem(item, out previousItem))
+            if (characterEquipements[characterIndex].AddItem(item, out previousItem))
             {
                 if (previousItem != null)
                 {
@@ -190,13 +203,14 @@ public class ScCharacter : MonoBehaviour
 
     public void Unequip(ScEquipableItem item)
     {
-        if (!inventory.IsFull() && equipmentPanel.RemoveItem(item))
+        if (!inventory.IsFull() && characterEquipements[characterIndex].RemoveItem(item))
         {
             item.Unequip(characterData[characterIndex]);
             statsPanel.UpdateStatsValue();
             inventory.AddItem(item);
             
-
         }
     }
+
+    #endregion
 }

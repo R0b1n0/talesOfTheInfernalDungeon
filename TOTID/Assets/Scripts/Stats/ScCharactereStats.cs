@@ -29,7 +29,7 @@ namespace CharactherStats
             }
         }
         private bool isDirty = true;
-        private float valueSc;
+        public float valueSc;
         private float lastBaseValue = float.MinValue;
 
         public ScCharactereStats()
