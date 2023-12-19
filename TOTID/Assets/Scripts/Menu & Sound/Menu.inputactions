@@ -1,0 +1,34 @@
+{
+    "name": "Menu",
+    "maps": [
+        {
+            "name": "LoreSwitch",
+            "id": "c978b74a-9861-4893-a8f8-597343ee271d",
+            "actions": [
+                {
+                    "name": "Next",
+                    "type": "Button",
+                    "id": "f500d671-9e87-418e-99c1-4ed35b8666dd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d4b813e2-4d15-4e0a-9b86-ab1b8fd946b2",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
