@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScMob : MonoBehaviour
 {
     [Header("Mob Parameters")]
-    [SerializeField] protected int hp;
+    [SerializeField] public int hp;
     [SerializeField] protected int maxActionPoint;
     [SerializeField] public float fovMaxAngle;
     [SerializeField] public float agroDistance;
