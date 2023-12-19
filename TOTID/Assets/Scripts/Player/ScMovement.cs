@@ -9,7 +9,7 @@ public class ScMovement : MonoBehaviour
     public ScWayPoint currentCell;
     [SerializeField] LayerMask playerCollMask;
     [SerializeField] Collider playerCollider;
-    private List<ScWayPoint> path = new List<ScWayPoint>();
+    public List<ScWayPoint> path = new List<ScWayPoint>();
     private ScAction actionScript;
     Vector3 previousPos;
     [SerializeField] Transform feetPos;
