@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScAction : MonoBehaviour
 {
     [SerializeField] Transform cameraHolder;
     [SerializeField] private int maxActionPoint;
-    [SerializeField] ScActionPointDisplay actionDisplay;
+
+
+    [SerializeField] TextMeshProUGUI actionPointText;
 
 
     private ScMovement movementScript;
     private ScGps myTomTom = new ScGps();
 
-    public int actionPoint;
+    private int actionPoint;
     private bool canTriggerNewAction;
     private playerState mystate;
 
@@ -75,7 +78,7 @@ public class ScAction : MonoBehaviour
     public void UseOneActionPoint()
     {
         actionPoint--;
-        actionDisplay.ActionPointText();
+        UpdateActionPointDisplay();
         if (actionPoint == 0)
         {
             Sccyclemanager.instance.PlayerTurnOver();
@@ -94,8 +97,13 @@ public class ScAction : MonoBehaviour
 
     private void PlayerTurnsBegin()
     {
-        actionDisplay.ActionPointText();
         actionPoint = maxActionPoint;
+        UpdateActionPointDisplay();
+    }
+
+    private void UpdateActionPointDisplay()
+    {
+        actionPointText.text = actionPoint.ToString();
     }
 }
 
