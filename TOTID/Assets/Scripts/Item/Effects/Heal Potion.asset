@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b16a2a015397e2949ac23eae0f3ba299, type: 3}
-  m_Name: Potion Heal
+  m_Script: {fileID: 11500000, guid: 7aa35139acd99bc458387818a49544a0, type: 3}
+  m_Name: Heal Potion
   m_EditorClassIdentifier: 
-  nameItem: heal potion
+  nameItem: Heal Potion
   icon: {fileID: 21300000, guid: a830be744034bdb48bbb19708c9d22d0, type: 3}
-  strengthBonus: 0
-  healthBonus: 0
-  strengthPercent: 0
-  healthPercent: 0
-  equipmentType: 0
+  IsConsumable: 1
+  effects:
+  - {fileID: 11400000, guid: 44cb7cbaa4f796147bbe86e017b1fa68, type: 2}
