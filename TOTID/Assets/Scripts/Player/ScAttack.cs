@@ -11,9 +11,9 @@ public class ScAttack : MonoBehaviour
     
 
     // Update is called once per frame
-    public void Attack(ScMob mobToAttack)
+    public void AttackPart()
     {
-        mobToAttack.TakeDamage(10);
+        //mobToAttack.TakeDamage(damage);
             slash.Play();   
     }
 }

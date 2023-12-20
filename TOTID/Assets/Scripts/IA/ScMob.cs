@@ -9,6 +9,7 @@ public class ScMob : MonoBehaviour
     [Header("Mob Parameters")]
     [SerializeField] public int hp;
     [SerializeField] protected int maxActionPoint;
+    [SerializeField] protected int strenght;
     [SerializeField] public float fovMaxAngle;
     [SerializeField] public float agroDistance;
     [SerializeField] public float looseAgroDistance;
@@ -31,8 +32,6 @@ public class ScMob : MonoBehaviour
     protected ScMovement playerMovementRef;
     protected ScGps myGps = new ScGps();
     protected ScWayPoint nextCell;
-    protected ScCharacterData characterData;
-    protected ScCharacter character;
 
     private List<ScWayPoint> path = new List<ScWayPoint>();
     private List<ScWayPoint> patrolWayPoint = new List<ScWayPoint>();
@@ -133,6 +132,7 @@ public class ScMob : MonoBehaviour
 
     protected void Die()
     {
+        Sccyclemanager.instance.AMobDied();
         Destroy(gameObject);
     }
 
@@ -150,7 +150,7 @@ public class ScMob : MonoBehaviour
     public void TakeDamage(int damageValue)
     {
         hp -= damageValue;
-        if(hp < 0)
+        if(hp <= 0)
         {
             Die();
         }
@@ -158,7 +158,7 @@ public class ScMob : MonoBehaviour
 
     protected void AttackPlayer()
     {
-        //character.takeDamage(10);
+        ScCharacter.Instance.takeDamage(strenght);
         Debug.Log("attackedPlayer");
     }
     protected void ActionEnd()

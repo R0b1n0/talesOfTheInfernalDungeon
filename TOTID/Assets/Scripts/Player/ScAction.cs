@@ -8,12 +8,13 @@ public class ScAction : MonoBehaviour
     [SerializeField] Transform cameraHolder;
     [SerializeField] private int maxActionPoint;
 
-
+    [SerializeField] ScCharacter teamData;
     [SerializeField] TextMeshProUGUI actionPointText;
 
 
     private ScMovement movementScript;
     private ScAttack attackScript;
+    
     private ScGps myTomTom = new ScGps();
 
     private int actionPoint;
@@ -80,7 +81,8 @@ public class ScAction : MonoBehaviour
                         {
                             if(neighbour == mobWaypoint)
                             {
-                                attackScript.Attack(hit.collider.transform.GetComponent<ScMob>());
+                                attackScript.AttackPart();
+                                hit.collider.transform.GetComponent<ScMob>().TakeDamage((int)teamData.characterData[teamData.characterIndex].strength.valueSc);
                                 UseOneActionPoint();
                                 break; 
                             }

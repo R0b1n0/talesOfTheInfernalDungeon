@@ -2,6 +2,7 @@ using CharactherStats;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ public class ScCharacterData : MonoBehaviour
     public ScCharactereStats strength = new ScCharactereStats();
     public ScCharactereStats health = new ScCharactereStats();
 
-    [SerializeField] Image highLight;
+    [SerializeField] GameObject highLight;
 
     #region Text, Slider, HealthBarScirpt, Image(Item and Weapon), StatsPanelScript,
     [Space]
@@ -63,7 +64,7 @@ public class ScCharacterData : MonoBehaviour
 
     public void SetHighLight(bool IsHighLight)
     {
-        highLight.enabled = IsHighLight;
+        highLight.SetActive(IsHighLight);
     }
 
     #region Take Damage

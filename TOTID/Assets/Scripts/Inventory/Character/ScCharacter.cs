@@ -7,6 +7,7 @@ using TMPro;
 
 public class ScCharacter : MonoBehaviour
 {
+    public static ScCharacter Instance;
 
     [SerializeField] public List<ScCharacterData> characterData = new List<ScCharacterData>();
     [Space]
@@ -31,6 +32,10 @@ public class ScCharacter : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
         UpdateUiInfo();
     }
 

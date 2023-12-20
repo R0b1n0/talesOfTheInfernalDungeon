@@ -49,9 +49,19 @@ public class Sccyclemanager : MonoBehaviour
         ennemiAlive += 1;
     }
 
+    public void AMobDied()
+    {
+        ennemiAlive --;
+    }
+
     public void PlayerTurnOver()
     {
-        ennemiActionEvent.Invoke();
-        answers = 0;
+        if (ennemiAlive > 0)
+        {
+            ennemiActionEvent.Invoke();
+            answers = 0;
+        }
+        else 
+            playerActionEvent.Invoke();
     }
 }
