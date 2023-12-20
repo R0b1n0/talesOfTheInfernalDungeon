@@ -9,11 +9,10 @@ public class ScAttack : MonoBehaviour
     private ScAction actionScript;
     [SerializeField]
     private ParticleSystem slash;
+    [SerializeField]
     private ScMob mob;
     Ray raytoIA;
     RaycastHit hitIA = new RaycastHit();
-    [SerializeField]
- 
     private ScMovement movementScript;
     private void Start()
     {
@@ -40,8 +39,7 @@ public class ScAttack : MonoBehaviour
                             actionScript.UseOneActionPoint();
                             mob.hp -= 10;
                             slash.Play();
-                        }
-                        
+                        } 
                     }
                 }
             }

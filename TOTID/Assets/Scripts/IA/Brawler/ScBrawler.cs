@@ -49,6 +49,7 @@ public class ScBrawler : ScMob
                 break;
             case MobState.Attack:
                 AttackPlayer();
+                ActionEnd();
                 break;
         }
     }

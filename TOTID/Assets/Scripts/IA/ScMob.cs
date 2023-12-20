@@ -32,7 +32,7 @@ public class ScMob : MonoBehaviour
     protected ScGps myGps = new ScGps();
     protected ScWayPoint nextCell;
     protected ScCharacterData characterData;
-
+    protected ScCharacter character;
 
     private List<ScWayPoint> path = new List<ScWayPoint>();
     private List<ScWayPoint> patrolWayPoint = new List<ScWayPoint>();
@@ -145,7 +145,8 @@ public class ScMob : MonoBehaviour
 
     protected void AttackPlayer()
     {
-      
+        //character.takeDamage(10);
+        Debug.Log("attackedPlayer");
     }
     protected void ActionEnd()
     { 

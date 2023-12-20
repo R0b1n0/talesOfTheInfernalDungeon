@@ -19,6 +19,7 @@ public class ScBtBrawlAttack : EWNode
         if (neighbors.Contains(ScMovement.Instance.currentCell))
         {
             Debug.Log("à l'attaque ");
+            mob.SetState(MobState.Attack);
             return EWNodeState.SUCCESS;
         }
         else 
