@@ -15,6 +15,7 @@ public class ScMovement : MonoBehaviour
     private Transform myTrans;
     [SerializeField] Transform feetPos;
 
+
     LineRenderer linePath;
     public List<Vector3> pathPositions = new List<Vector3>();
 
@@ -53,11 +54,15 @@ public class ScMovement : MonoBehaviour
         playerCollider.enabled = true;
     }
 
-
     public ScWayPoint GetCurrentCell()
     {
         return currentCell;
     }
+
+    private void Update(){
+        if(path != null) { linePath.SetPosition(linePath.positionCount - 1, myTrans.position - new Vector3(0, 0.5f, 0)); }
+    }
+
     public void MoveToNextCell()
     {
         if (Vector3.Distance(transform.position, path[path.Count - 1].wayPointId + new Vector3(0, 1, 0)) < 0.1f)
@@ -66,8 +71,9 @@ public class ScMovement : MonoBehaviour
             currentCell = path[path.Count - 1];
             path.Remove(path[path.Count - 1]);
             actionScript.UseOneActionPoint();
-            pathPositions.RemoveAt(pathPositions.Count-1);
+            pathPositions.RemoveAt(pathPositions.Count - 1);
             linePath.positionCount = pathPositions.Count;
+
             if (path.Count == 0)
             {
                 ResetLine();

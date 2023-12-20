@@ -14,7 +14,6 @@ public class ScAudioManager : MonoBehaviour {
     public AudioClip[] sword;
     public AudioClip[] click;
 
-
     private void Start() {
         musicSource.clip = background;
         musicSource.Play();
