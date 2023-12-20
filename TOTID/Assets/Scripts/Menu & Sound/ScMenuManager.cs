@@ -36,7 +36,9 @@ public class ScMenuManager : MonoBehaviour {
     }
 
     public void BackMenu() {
-        audioManager.PlayRandomSFX(audioManager.click);
+        if (animator.GetBool("Creditin") != true) {
+            audioManager.PlayRandomSFX(audioManager.click);
+        }
         animator.SetBool("Creditin", false);
         animator.SetBool("Settings", false);
         animator.SetBool("Selecting", false);
