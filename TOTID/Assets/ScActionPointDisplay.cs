@@ -9,6 +9,11 @@ public class ScActionPointDisplay : MonoBehaviour
 
     private void Awake()
     {
-        //actionPointText.text = action.ac
+        actionPointText.text = action.actionPoint.ToString();
+    }
+
+    public void ActionPointText()
+    {
+        actionPointText.text  = action.actionPoint.ToString();
     }
 }
