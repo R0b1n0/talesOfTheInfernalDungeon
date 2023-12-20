@@ -9,7 +9,7 @@ public class ScAttack : MonoBehaviour
     private ScAction actionScript;
     [SerializeField]
     private ParticleSystem slash;
-    public ScMob mob;
+    private ScMob mob;
     Ray raytoIA;
     RaycastHit hitIA = new RaycastHit();
     [SerializeField]
@@ -19,6 +19,7 @@ public class ScAttack : MonoBehaviour
     {
         movementScript = GetComponent<ScMovement>();
         actionScript =  GetComponent<ScAction>();
+        //GameObject[] IA = GameObject.FindGameObjectsWithTag("IA");
         //slash = GetComponent<ParticleSystem>();
     }
 
@@ -36,7 +37,6 @@ public class ScAttack : MonoBehaviour
                     {
                         if(mob.hp >= 0 )
                         {
-                            //slash.transform.position = this.transform.position;
                             actionScript.UseOneActionPoint();
                             mob.hp -= 10;
                             slash.Play();

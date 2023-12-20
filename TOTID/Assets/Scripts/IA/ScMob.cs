@@ -145,7 +145,7 @@ public class ScMob : MonoBehaviour
 
     protected void AttackPlayer()
     {
-       
+      
     }
     protected void ActionEnd()
     { 
