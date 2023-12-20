@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScActionPointDisplay : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private ScAction action;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] TextMeshProUGUI actionPointText;
+
+    private void Awake()
     {
-        
+        //actionPointText.text = action.ac
     }
 }
