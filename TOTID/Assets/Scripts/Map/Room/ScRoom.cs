@@ -49,7 +49,7 @@ public class ScRoom : MonoBehaviour
             {
                 if (wayPoint != null)
                 {
-                    if (destination.x < wayPoint.wayPointId.x + (cellSize / 2) && destination.x > wayPoint.wayPointId.x - (cellSize / 2) && destination.z < wayPoint.wayPointId.z + (cellSize / 2) && destination.z > wayPoint.wayPointId.z - (cellSize / 2))
+                    if (destination.x <= wayPoint.wayPointId.x + (cellSize / 2) && destination.x > wayPoint.wayPointId.x - (cellSize / 2) && destination.z <= wayPoint.wayPointId.z + (cellSize / 2) && destination.z > wayPoint.wayPointId.z - (cellSize / 2))
                     {
                         resultWayPoint = wayPoint;
                         break;
@@ -59,11 +59,7 @@ public class ScRoom : MonoBehaviour
             if (resultWayPoint != null)
                 break;
         }
-
-        if (resultWayPoint == null)
-            return myGraph[0][0];
-        else 
-            return resultWayPoint;
+        return resultWayPoint;
     }
 
     #region mapping
@@ -79,10 +75,11 @@ public class ScRoom : MonoBehaviour
 
             for (int j = 0; j < myTrans.localScale.z / cellSize; j++)
             {
-                Vector3 underGround = new Vector3(xOffset, myTrans.position.y + (myTrans.localScale.y / 2) - yOffset  , zOffset + cellSize*j);
+                Vector3 underGround = new Vector3(xOffset, myTrans.position.y + (myTrans.localScale.y / 2) /*- yOffset*/  , zOffset + cellSize*j);
                 Ray ray = new Ray(underGround, Vector3.up);
 
-                if (!Physics.Raycast(ray, 100))
+                RaycastHit tempo = new RaycastHit();
+                if (!Physics.Raycast(ray, out tempo, 100))
                 {
                     Vector3 newWayPointPos = new Vector3(xOffset, myTrans.position.y + (myTrans.localScale.y / 2), zOffset + cellSize * j);
                     

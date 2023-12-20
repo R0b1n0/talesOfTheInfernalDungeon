@@ -341,7 +341,7 @@ Transform:
   m_GameObject: {fileID: 393279790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.56, y: 1.88, z: 0}
+  m_LocalPosition: {x: 1, y: 1.88, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -797,6 +797,29 @@ MonoBehaviour:
   getYourNeighbors:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1174909483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5609594819714541576, guid: 5b693556fb1fc2d469544d3018981e7c, type: 3}
+  m_PrefabInstance: {fileID: 1360028464}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1174909488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174909483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6883889aaf208b42b3dfaff1201514b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSize: 2
+  yOffset: 0
+  roof:
+    serializedVersion: 2
+    m_Bits: 0
+  neihborRooms: []
 --- !u!1 &1187364488
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +919,7 @@ Transform:
   m_GameObject: {fileID: 1187364488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.44, y: 1.38, z: 2.26}
+  m_LocalPosition: {x: 3, y: 1.38, z: 3}
   m_LocalScale: {x: 4, y: 0.3854, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -957,7 +980,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5609594819714541576, guid: 5b693556fb1fc2d469544d3018981e7c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1174909488}
   m_SourcePrefab: {fileID: 100100000, guid: 5b693556fb1fc2d469544d3018981e7c, type: 3}
 --- !u!1 &1534202817
 GameObject:

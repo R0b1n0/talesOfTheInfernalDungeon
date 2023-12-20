@@ -11,42 +11,12 @@ public class ScInventoryInput : MonoBehaviour
 
 
     [SerializeField] GameObject inventoryGameObject;
+    [SerializeField] GameObject crossAir;
 
     [SerializeField] GameObject tooltipsItem;
     [SerializeField] GameObject tooltipsStats;
     [SerializeField] GameObject background;
-    [SerializeField] KeyCode[] toggleInventoryKeys;
 
-
-    void Update()
-    {
-        for (int i = 0; i < toggleInventoryKeys.Length; i++)
-        {
-            if (Input.GetKeyDown(toggleInventoryKeys[i]))
-            {
-                inventoryGameObject.SetActive(!inventoryGameObject.activeSelf);
-
-                tooltipsItem.SetActive(tooltipsItem.activeSelf);
-                tooltipsStats.SetActive(tooltipsStats.activeSelf);
-                background.SetActive(!background.activeSelf);
-                #region Stats Display
-                characterDisplayStats.SetActive(!characterDisplayStats.activeSelf);
-                characterStatGameObject.SetActive(!characterStatGameObject.activeSelf);
-                #endregion
-
-                if (inventoryGameObject.activeSelf)
-                {
-                    ShowMouseCursor();
-                }
-                else
-                {
-                    HideMouseCursor();
-                }
-
-                break;
-            }
-        }
-    }
 
     public void ShowMouseCursor()
     {
@@ -57,5 +27,28 @@ public class ScInventoryInput : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void GameMenuSwitch()
+    {
+        inventoryGameObject.SetActive(!inventoryGameObject.activeSelf);
+
+        crossAir.SetActive(!crossAir.activeSelf);
+        tooltipsItem.SetActive(tooltipsItem.activeSelf);
+        tooltipsStats.SetActive(tooltipsStats.activeSelf);
+        background.SetActive(!background.activeSelf);
+        #region Stats Display
+        characterDisplayStats.SetActive(!characterDisplayStats.activeSelf);
+        characterStatGameObject.SetActive(!characterStatGameObject.activeSelf);
+        #endregion
+
+        if (inventoryGameObject.activeSelf)
+        {
+            ShowMouseCursor();
+        }
+        else
+        {
+            HideMouseCursor();
+        }
     }
 }

@@ -2,7 +2,7 @@
     "name": "PlayerInGame",
     "maps": [
         {
-            "name": "Ingame",
+            "name": "InGame",
             "id": "dafb93a9-d4c5-424e-90e4-449e79b60621",
             "actions": [
                 {
@@ -18,6 +18,15 @@
                     "name": "leftMouseAction",
                     "type": "Button",
                     "id": "2c2e18fe-7059-4dbe-8edc-e5b5202234e2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "toMenue",
+                    "type": "Button",
+                    "id": "ae37a5d4-d049-4f30-8fb2-ca9f74b3bdc7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -44,6 +53,45 @@
                     "processors": "",
                     "groups": "",
                     "action": "leftMouseAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a0ce3b6-3d65-483b-b466-eabd963471cf",
+                    "path": "<Keyboard>/#(E)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "toMenue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "InMenu",
+            "id": "bacadecf-5a7e-4709-8b5e-029699d870eb",
+            "actions": [
+                {
+                    "name": "toGame",
+                    "type": "Button",
+                    "id": "5ff5f558-c1b8-4e01-9bc1-eee1936b286e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "aaf20533-a017-4aaa-889b-dec7b228eef6",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "toGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

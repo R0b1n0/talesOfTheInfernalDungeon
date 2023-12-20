@@ -57,8 +57,13 @@ public class ScAction : MonoBehaviour
                     case 6:
                         mystate = playerState.moving;
                         ScWayPoint destination = hit.transform.GetComponent<ScRoom>().FindClossestCell(hit.point);
-                        movementScript.SetPath(myTomTom.FindPath(movementScript.GetCurrentCell(), destination));
-                        canTriggerNewAction = false;
+                        if (destination != null)
+                        {
+                            movementScript.SetPath(myTomTom.FindPath(movementScript.GetCurrentCell(), destination));
+                            canTriggerNewAction = false;
+                        }
+                        else
+                            mystate = playerState.idle;
                         break;
                 }
             }
