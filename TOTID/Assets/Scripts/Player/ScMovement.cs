@@ -60,7 +60,7 @@ public class ScMovement : MonoBehaviour
     }
 
     private void Update(){
-        if(path != null) { linePath.SetPosition(linePath.positionCount - 1, myTrans.position - new Vector3(0, 0.5f, 0)); }
+        if(path != null) { linePath.SetPosition(linePath.positionCount - 1, myTrans.position - new Vector3(0, 0.6f, 0)); }
     }
 
     public void MoveToNextCell()
