@@ -10,30 +10,40 @@ public class ScMenuManager : MonoBehaviour {
     [SerializeField] private Lorin lore = Lorin.Null;
 
     [SerializeField] private InputActionReference next;
+    ScAudioManager audioManager;
+
+    private void Awake(){
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<ScAudioManager>();
+    }
 
     private void Start() {
         animator = GetComponent<Animator>();
     }
 
     public void Creditin() {
+        audioManager.PlayRandomSFX(audioManager.click);
         animator.SetBool("Creditin", true);
     }
 
     public void LoadSettings() {
+        audioManager.PlayRandomSFX(audioManager.click);
         animator.SetBool("Settings", true);
     }
 
     public void SelectionMenu(){
+        audioManager.PlayRandomSFX(audioManager.click);
         animator.SetBool("Selecting", true);
     }
 
     public void BackMenu() {
+        audioManager.PlayRandomSFX(audioManager.click);
         animator.SetBool("Creditin", false);
         animator.SetBool("Settings", false);
         animator.SetBool("Selecting", false);
     }
     
     public void QuitGame() {
+        audioManager.PlayRandomSFX(audioManager.click);
         Application.Quit();
     }
 
@@ -53,6 +63,7 @@ public class ScMenuManager : MonoBehaviour {
     }
 
     public void Lore() {
+        audioManager.PlayRandomSFX(audioManager.click);
         animator.SetBool("Loring", true);
         animator.SetInteger("Lored", 1);
         lore = Lorin.Text1;

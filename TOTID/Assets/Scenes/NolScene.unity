@@ -2785,7 +2785,22 @@ MonoBehaviour:
   musicSource: {fileID: 1765636039}
   SFXSource: {fileID: 861098917}
   background: {fileID: 8300000, guid: 1bea7e65066d1854e82c5c96249e818c, type: 3}
-  test: {fileID: 8300000, guid: f57bf62c4fb30a341abd2a59de1a3ba2, type: 3}
+  mob: {fileID: 8300000, guid: cc89c7b509804ba448f116db7cba59ff, type: 3}
+  footStep:
+  - {fileID: 8300000, guid: f7a96f84fc5ff2249a112471ef39001a, type: 3}
+  - {fileID: 8300000, guid: 7dbacaf70b17db54db960aeb65b09fb2, type: 3}
+  - {fileID: 8300000, guid: ec6604ea072924742af03330603f9ea9, type: 3}
+  - {fileID: 8300000, guid: b84be1a290a2f784286bbc1a6a232ca9, type: 3}
+  - {fileID: 8300000, guid: 4b8feb014d19d034ea681301cd371661, type: 3}
+  sword:
+  - {fileID: 8300000, guid: 3b9d1425b8e6d1740b900d47e9c5a474, type: 3}
+  - {fileID: 8300000, guid: ccf3ddd7422137b41a7633bde7453e3f, type: 3}
+  - {fileID: 8300000, guid: ca907512b3f14654bb211e3ea34dfce3, type: 3}
+  - {fileID: 8300000, guid: 6d848bdb769d0c44bb007752053521b1, type: 3}
+  - {fileID: 8300000, guid: c0467aaedff290846a9208b708bdb81c, type: 3}
+  click:
+  - {fileID: 8300000, guid: 93a66ce13fc3e3643b8c8f97c0e1c8a9, type: 3}
+  - {fileID: 8300000, guid: e1a8f544671c2e349b443e84d6ec6c71, type: 3}
 --- !u!4 &689841086
 Transform:
   m_ObjectHideFlags: 0
