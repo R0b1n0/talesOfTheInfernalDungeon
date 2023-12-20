@@ -13,6 +13,7 @@ public class ScAction : MonoBehaviour
 
 
     private ScMovement movementScript;
+    private ScAttack attackScript;
     private ScGps myTomTom = new ScGps();
 
     private int actionPoint;
@@ -23,6 +24,7 @@ public class ScAction : MonoBehaviour
     private void Start()
     {
         movementScript = GetComponent<ScMovement>();
+        attackScript = GetComponent<ScAttack>();
         actionPoint = maxActionPoint;
         canTriggerNewAction = true;
         mystate = playerState.idle;
@@ -68,6 +70,21 @@ public class ScAction : MonoBehaviour
                         }
                         else
                             mystate = playerState.idle;
+                        break;
+
+                    case 10:
+                        // mob
+                        ScMob mob = hit.collider.transform.GetComponent<ScMob>();
+                        ScWayPoint mobWaypoint = mob.currentCell;
+                        foreach(ScWayPoint neighbour in movementScript.currentCell.GetAllNeighbors())
+                        {
+                            if(neighbour == mobWaypoint)
+                            {
+                                attackScript.Attack(hit.collider.transform.GetComponent<ScMob>());
+                                UseOneActionPoint();
+                                break; 
+                            }
+                        }
                         break;
                 }
             }

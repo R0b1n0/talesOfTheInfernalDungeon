@@ -1,3 +1,4 @@
+using CharactherStats;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class ScMob : MonoBehaviour
 {
     [Header("Mob Parameters")]
-    [SerializeField] protected int hp;
+    [SerializeField] public int hp;
     [SerializeField] protected int maxActionPoint;
     [SerializeField] public float fovMaxAngle;
     [SerializeField] public float agroDistance;
@@ -30,7 +31,8 @@ public class ScMob : MonoBehaviour
     protected ScMovement playerMovementRef;
     protected ScGps myGps = new ScGps();
     protected ScWayPoint nextCell;
-
+    protected ScCharacterData characterData;
+    protected ScCharacter character;
 
     private List<ScWayPoint> path = new List<ScWayPoint>();
     private List<ScWayPoint> patrolWayPoint = new List<ScWayPoint>();
@@ -129,6 +131,10 @@ public class ScMob : MonoBehaviour
         }
     } //always put this one in the mob start 
 
+    protected void Die()
+    {
+        Destroy(gameObject);
+    }
 
     protected void FindPlayer()
     {
@@ -141,7 +147,20 @@ public class ScMob : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damageValue)
+    {
+        hp -= damageValue;
+        if(hp < 0)
+        {
+            Die();
+        }
+    }
 
+    protected void AttackPlayer()
+    {
+        //character.takeDamage(10);
+        Debug.Log("attackedPlayer");
+    }
     protected void ActionEnd()
     { 
         if (currentActionPoint == 0)
@@ -153,6 +172,12 @@ public class ScMob : MonoBehaviour
         {
             Behave();
         }
+    }
+
+    protected void FinishTurn()
+    {
+        Sccyclemanager.instance.answers++;
+        myState = MobState.Idle;
     }
     public void SetState(MobState newState)
     {

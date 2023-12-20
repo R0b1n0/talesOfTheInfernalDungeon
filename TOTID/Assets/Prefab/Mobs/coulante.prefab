@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1926381136579110971}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: skinHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,8 @@ GameObject:
   - component: {fileID: 288202316244846106}
   - component: {fileID: 987751381645305986}
   - component: {fileID: 1908557549210928742}
-  m_Layer: 0
+  - component: {fileID: 4534925770637382464}
+  m_Layer: 10
   m_Name: coulante
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93fc3b015e833fc4db52abe88e9b41c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
+  hp: 10
   maxActionPoint: 100
   fovMaxAngle: 0
   agroDistance: 0
@@ -106,6 +107,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a7b9a8da4a3024bace775ab4796ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &4534925770637382464
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2397087076782408677}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.51, y: 1.78, z: 0.01}
+  m_Center: {x: 0.19, y: 0.91, z: 0}
 --- !u!1 &2845544102390623423
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2584658350946939488}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7940570450712907900}
   - component: {fileID: 5589675991008560902}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: coulanteFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,13 +253,13 @@ GameObject:
   m_Component:
   - component: {fileID: 301409670908845405}
   - component: {fileID: 6340768946644545619}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &301409670908845405
 Transform:
   m_ObjectHideFlags: 0
