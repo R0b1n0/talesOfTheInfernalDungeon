@@ -48,8 +48,9 @@ public class ScBrawler : ScMob
                 ActionEnd();
                 break;
             case MobState.Attack:
-                AttackPlayer();
-                ActionEnd();
+                //AttackPlayer();
+                FinishTurn();
+                //ActionEnd();
                 break;
         }
     }

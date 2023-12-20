@@ -131,6 +131,10 @@ public class ScMob : MonoBehaviour
         }
     } //always put this one in the mob start 
 
+    protected void Die()
+    {
+        Destroy(gameObject);
+    }
 
     protected void FindPlayer()
     {
@@ -140,6 +144,15 @@ public class ScMob : MonoBehaviour
             path.Clear();
             path = myGps.FindPath(currentCell, ScMovement.Instance.currentCell);
             path.RemoveAt(0);
+        }
+    }
+
+    public void TakeDamage(int damageValue)
+    {
+        hp -= damageValue;
+        if(hp < 0)
+        {
+            Die();
         }
     }
 
@@ -159,6 +172,12 @@ public class ScMob : MonoBehaviour
         {
             Behave();
         }
+    }
+
+    protected void FinishTurn()
+    {
+        Sccyclemanager.instance.answers++;
+        myState = MobState.Idle;
     }
     public void SetState(MobState newState)
     {

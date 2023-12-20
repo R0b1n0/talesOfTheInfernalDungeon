@@ -5,45 +5,15 @@ using UnityEngine;
 
 public class ScAttack : MonoBehaviour
 {
-    private int damage;
-    private ScAction actionScript;
+
     [SerializeField]
     private ParticleSystem slash;
-    [SerializeField]
-    private ScMob mob;
-    Ray raytoIA;
-    RaycastHit hitIA = new RaycastHit();
-    private ScMovement movementScript;
-    private void Start()
-    {
-        movementScript = GetComponent<ScMovement>();
-        actionScript =  GetComponent<ScAction>();
-        //GameObject[] IA = GameObject.FindGameObjectsWithTag("IA");
-        //slash = GetComponent<ParticleSystem>();
-    }
+    
 
     // Update is called once per frame
-    void Update()
+    public void Attack(ScMob mobToAttack)
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            raytoIA = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (ScMovement.Instance.currentCell.GetAllNeighbors().Contains(mob.currentCell))
-            {
-                if (Physics.Raycast(raytoIA, out hitIA))
-                {
-                    if (hitIA.collider != null)
-                    {
-                        if(mob.hp >= 0 )
-                        {
-                            actionScript.UseOneActionPoint();
-                            mob.hp -= 10;
-                            slash.Play();
-                        } 
-                    }
-                }
-            }
-        }
-            
+        mobToAttack.TakeDamage(10);
+            slash.Play();   
     }
 }
