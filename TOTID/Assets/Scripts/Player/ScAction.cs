@@ -74,6 +74,10 @@ public class ScAction : MonoBehaviour
                             mystate = playerState.idle;
                         break;
 
+                    case 7:
+                        hit.transform.GetComponent<ScInteractible>().Interact();
+                        break;
+
                     case 10:
                         // mob
                         ScMob mob = hit.collider.transform.GetComponent<ScMob>();
