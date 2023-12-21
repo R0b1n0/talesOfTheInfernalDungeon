@@ -27,6 +27,7 @@ public class ScAction : MonoBehaviour
         movementScript = GetComponent<ScMovement>();
         attackScript = GetComponent<ScAttack>();
         actionPoint = maxActionPoint;
+        UpdateActionPointDisplay();
         canTriggerNewAction = true;
         mystate = playerState.idle;
         Sccyclemanager.instance.playerActionEvent.AddListener(PlayerTurnsBegin);

@@ -25,6 +25,7 @@ public class ScRoom : MonoBehaviour
     private Transform myTrans;
     private ScWayPoint wayPointDestination;
     private List<ScWayPoint> path;
+    private float tolerance;
 
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class ScRoom : MonoBehaviour
         myTrans = transform; 
         ScMapManagor.Instance.getYourNeighbors.AddListener(FindWayPointInOtherRoom);
         MapEnvironement();
-
+        tolerance = 0.2f;
     }
 
 
@@ -77,6 +78,8 @@ public class ScRoom : MonoBehaviour
             {
                 Vector3 underGround = new Vector3(xOffset, myTrans.position.y + (myTrans.localScale.y / 2) /*- yOffset*/  , zOffset + cellSize*j);
                 Ray ray = new Ray(underGround, Vector3.up);
+
+                
 
                 RaycastHit tempo = new RaycastHit();
                 if (!Physics.Raycast(ray, out tempo, 100))
@@ -139,7 +142,7 @@ public class ScRoom : MonoBehaviour
                         {
                             if ( myGraph[0][myRaw] != null && pointToStudy[hisRaw] != null)
                             {
-                                if (Vector3.Distance(myGraph[0][myRaw].wayPointId, pointToStudy[hisRaw].wayPointId) == cellSize )
+                                if (Vector3.Distance(myGraph[0][myRaw].wayPointId, pointToStudy[hisRaw].wayPointId) < cellSize + tolerance)
                                 {
                                     myGraph[0][myRaw].AddNewNeighbor(pointToStudy[hisRaw]);
                                     pointToStudy[hisRaw].AddNewNeighbor(myGraph[0][myRaw]);
@@ -156,7 +159,7 @@ public class ScRoom : MonoBehaviour
                         {
                             if (myGraph[myGraph.Count - 1][myRaw] != null && pointToStudy[hisRaw] != null)
                             {
-                                if (Vector3.Distance(myGraph[myGraph.Count - 1][myRaw].wayPointId, pointToStudy[hisRaw].wayPointId) == cellSize)
+                                if (Vector3.Distance(myGraph[myGraph.Count - 1][myRaw].wayPointId, pointToStudy[hisRaw].wayPointId) < cellSize + tolerance)
                                 {
                                     myGraph[myGraph.Count - 1][myRaw].AddNewNeighbor(pointToStudy[hisRaw]);
                                     pointToStudy[hisRaw].AddNewNeighbor(myGraph[myGraph.Count - 1][myRaw]);
@@ -173,7 +176,7 @@ public class ScRoom : MonoBehaviour
                         {
                             if (myGraph[myRaw][0] != null && pointToStudy[hisRaw] != null)
                             {
-                                if (Vector3.Distance(myGraph[myRaw][0].wayPointId, pointToStudy[hisRaw].wayPointId) == cellSize)
+                                if (Vector3.Distance(myGraph[myRaw][0].wayPointId, pointToStudy[hisRaw].wayPointId) < cellSize + tolerance)
                                 {
                                     myGraph[myRaw][0].AddNewNeighbor(pointToStudy[hisRaw]);
                                     pointToStudy[hisRaw].AddNewNeighbor(myGraph[myRaw][0]);
@@ -190,7 +193,7 @@ public class ScRoom : MonoBehaviour
                         {
                             if (myGraph[myRaw][myGraph[myRaw].Count-1] != null && pointToStudy[hisRaw] != null)
                             {
-                                if (Vector3.Distance(myGraph[myRaw][myGraph[myRaw].Count - 1].wayPointId, pointToStudy[hisRaw].wayPointId) == cellSize)
+                                if (Vector3.Distance(myGraph[myRaw][myGraph[myRaw].Count - 1].wayPointId, pointToStudy[hisRaw].wayPointId) < cellSize + tolerance)
                                 {
                                     myGraph[myRaw][myGraph[myRaw].Count - 1].AddNewNeighbor(pointToStudy[hisRaw]);
                                     pointToStudy[hisRaw].AddNewNeighbor(myGraph[myRaw][myGraph[myRaw].Count - 1]);

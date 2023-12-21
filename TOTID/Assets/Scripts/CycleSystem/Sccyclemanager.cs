@@ -32,7 +32,7 @@ public class Sccyclemanager : MonoBehaviour
         {
             ennemiActionEvent = new UnityEvent();
         }
-        playerActionEvent.Invoke();
+        //playerActionEvent.Invoke();
     }
 
     void Update()
