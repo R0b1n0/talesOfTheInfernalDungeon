@@ -6354,7 +6354,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Dans un monde isole, Reeve et ses compagnons orphelins decouvrent que
+  m_text: 'Dans une contre isolee, Reeve et ses compagnons orphelins decouvrent que
     leur grand-pere est atteint d''une maladie devastatrice, Yersinia infernalis. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3ff82c697b65db247b4fd4b8a6e051b9, type: 2}

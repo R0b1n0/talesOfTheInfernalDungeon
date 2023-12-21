@@ -7,7 +7,7 @@ public class ScChest : ScInteractible {
     private Animator animator;
     [SerializeField] GameObject[] loot;
     private bool isChestOpen = false;
-    public float power = 3f;
+    public float power = 5f;
     [SerializeField] Transform spawnPoint;
 
     private void Start(){
@@ -28,7 +28,8 @@ public class ScChest : ScInteractible {
                 GameObject newLoot = Instantiate(loot[i], spawnPoint.position, Quaternion.identity);
                 Rigidbody body = newLoot.AddComponent<Rigidbody>();
             if (body != null) {
-                Vector3 dir = new Vector3(0, Random.Range(0.1f, 0.5f), 0).normalized + spawnPoint.forward*Random.Range(0.01f,0.05f);
+                Vector3 dir = new Vector3(0, Random.Range(0.1f, 0.5f), 0).normalized + spawnPoint.forward*Random.Range(0.5f,1f);
+                print(dir);
                 body.AddForce((dir * power), ForceMode.Impulse);
             }
         }

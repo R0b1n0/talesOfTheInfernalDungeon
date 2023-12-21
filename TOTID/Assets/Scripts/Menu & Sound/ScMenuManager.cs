@@ -58,10 +58,10 @@ public class ScMenuManager : MonoBehaviour {
     }
 
     public void ReplayLevel(){
-        
+        SceneManager.LoadScene(1);
     }
     public void Play() {
-        SceneManager.LoadScene("RobScene");
+        SceneManager.LoadScene(1);
     }
 
     public void Lore() {

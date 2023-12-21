@@ -177,8 +177,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loot:
   - {fileID: 5016424312257321190, guid: f43f59585f064b342be20af8216feb87, type: 3}
+  - {fileID: 5016424312257321190, guid: f43f59585f064b342be20af8216feb87, type: 3}
   power: 3
-  spawnPoint: {fileID: 0}
+  spawnPoint: {fileID: 2812673189063047229}
 --- !u!1 &4586546742153470971
 GameObject:
   m_ObjectHideFlags: 0
