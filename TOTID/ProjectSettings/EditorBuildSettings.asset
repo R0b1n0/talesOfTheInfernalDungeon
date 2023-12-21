@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NolScene.unity
     guid: 169aa1b996fe827439ec4f83b88769cd
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/mainMap SAfe.unity
+    guid: 35b271a8d65aa0f449656325b4244f49
+  - enabled: 1
     path: Assets/Scenes/NolScene2.unity
     guid: 1cc09a666b1209a4e9df6554db578fb2
-  - enabled: 1
-    path: Assets/Scenes/RobScene.unity
-    guid: f1508055e4322d742b89fddd56b0ffc8
   m_configObjects: {}

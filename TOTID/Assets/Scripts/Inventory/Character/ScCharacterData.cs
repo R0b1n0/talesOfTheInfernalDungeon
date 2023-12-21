@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScCharacterData : MonoBehaviour
@@ -74,6 +75,9 @@ public class ScCharacterData : MonoBehaviour
         healthText.text = health.Value.ToString();
         healthSlider.value = health.Value;
         healthSliderScript.SetHealth((int)health.Value);
+        if (health.valueSc <= 0)
+            SceneManager.LoadScene(2);
+
     }
     #endregion
 

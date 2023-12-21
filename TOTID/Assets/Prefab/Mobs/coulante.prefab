@@ -82,12 +82,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   maxActionPoint: 100
-  fovMaxAngle: 0
-  agroDistance: 0
-  looseAgroDistance: 0
-  patrolingSpeed: 0
-  agroSpeed: 0
-  partolWayPos: []
+  strenght: 10
+  fovMaxAngle: 45
+  agroDistance: 30
+  looseAgroDistance: 50
+  patrolingSpeed: 3
+  agroSpeed: 2
+  partolWayPos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   facePlayer: {fileID: 1908557549210928742}
   face: {fileID: 21300000, guid: dc3372276ba3eb84b97a1e393fd0ce8d, type: 3}
   dos: {fileID: 21300000, guid: ab6490e1f6a8a5f4391fda2cccc1e90b, type: 3}
