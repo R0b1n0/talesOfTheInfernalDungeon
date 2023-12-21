@@ -18,23 +18,24 @@ public class ScEquipableItem : ScItem
     public float healthPercent;
     [Space]
     public EquipmentType equipmentType;
+    public ScUsableItemEffect effect;
 
     public void Equip(ScCharacterData c)
     {
-        if(strengthBonus != 0)
+        if (strengthBonus != 0)
         {
             c.strength.AddModifier(new ScStatsModifier(strengthBonus, StatModType.Flat, this));
-        }        
-        if(strengthPercent != 0)
+        }
+        if (strengthPercent != 0)
         {
             c.strength.AddModifier(new ScStatsModifier(strengthPercent, StatModType.PercentMult, this));
-        }        
-        
-        if(healthBonus != 0)
+        }
+
+        if (healthBonus != 0)
         {
             c.health.AddModifier(new ScStatsModifier(healthBonus, StatModType.Flat, this));
-        }        
-        if(healthPercent != 0)
+        }
+        if (healthPercent != 0)
         {
             c.health.AddModifier(new ScStatsModifier(healthPercent, StatModType.PercentMult, this));
         }
@@ -83,7 +84,6 @@ public class ScEquipableItem : ScItem
 
     public override string GetDescription()
     {
-
         sb.Length = 0;
         AddStat(strengthBonus, "Strength");
         AddStat(healthBonus, "Health");
