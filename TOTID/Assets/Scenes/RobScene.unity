@@ -1176,7 +1176,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 1
   yOffset: 0.1
-  eedededed: {fileID: 1557065183}
+  roof:
+    serializedVersion: 2
+    m_Bits: 0
   neihborRooms: []
 --- !u!65 &638661367
 BoxCollider:
@@ -2860,7 +2862,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 1
   yOffset: 0.1
-  eedededed: {fileID: 1557065183}
+  roof:
+    serializedVersion: 2
+    m_Bits: 0
   neihborRooms:
   - roomScript: {fileID: 638661366}
     directionToRoom: 3
@@ -3201,6 +3205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfd4cffa0c8b2f45b4b4279b59fb600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiScript: {fileID: 0}
 --- !u!114 &1931425638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3233,6 +3238,7 @@ MonoBehaviour:
     m_Bits: 0
   playerCollider: {fileID: 468994468}
   feetPos: {fileID: 1559345420}
+  pathPositions: []
 --- !u!114 &1931425640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3247,6 +3253,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraHolder: {fileID: 472756551}
   maxActionPoint: 5
+  teamData: {fileID: 0}
+  actionPointText: {fileID: 0}
 --- !u!1 &1995340384
 GameObject:
   m_ObjectHideFlags: 0
@@ -3346,13 +3354,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995340384}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1264859808}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1995340389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3367,7 +3375,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 1
   yOffset: 0.1
-  eedededed: {fileID: 1557065183}
+  roof:
+    serializedVersion: 2
+    m_Bits: 0
   neihborRooms: []
 --- !u!1 &2006367353
 GameObject:
@@ -3474,7 +3484,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 1
   yOffset: 0.1
-  eedededed: {fileID: 1557065183}
+  roof:
+    serializedVersion: 2
+    m_Bits: 0
   neihborRooms: []
 --- !u!65 &2028706960
 BoxCollider:
