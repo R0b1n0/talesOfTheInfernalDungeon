@@ -721,7 +721,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 1
   yOffset: 0.1
-  eedededed: {fileID: 725311055}
+  roof:
+    serializedVersion: 2
+    m_Bits: 0
   neihborRooms: []
 --- !u!65 &420497902
 BoxCollider:
@@ -2027,6 +2029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraHolder: {fileID: 1506179903}
   maxActionPoint: 5
+  actionPointText: {fileID: 0}
 --- !u!114 &835117338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2072,6 +2075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfd4cffa0c8b2f45b4b4279b59fb600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiScript: {fileID: 0}
 --- !u!114 &835117341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2423,7 +2427,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 1
   yOffset: 0.1
-  eedededed: {fileID: 725311055}
+  roof:
+    serializedVersion: 2
+    m_Bits: 0
   neihborRooms: []
 --- !u!65 &1067029770
 BoxCollider:
@@ -3356,7 +3362,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 1
   yOffset: 0.1
-  eedededed: {fileID: 725311055}
+  roof:
+    serializedVersion: 2
+    m_Bits: 0
   neihborRooms:
   - roomScript: {fileID: 1067029769}
     directionToRoom: 3
@@ -3641,7 +3649,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 1
   yOffset: 0.1
-  eedededed: {fileID: 725311055}
+  roof:
+    serializedVersion: 2
+    m_Bits: 0
   neihborRooms: []
 --- !u!65 &1818182733
 BoxCollider:
