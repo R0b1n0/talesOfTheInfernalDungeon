@@ -58,7 +58,7 @@ public class ScMenuManager : MonoBehaviour {
     }
 
     public void ReplayLevel(){
-        
+        SceneManager.LoadScene(1);
     }
     public void Play() {
         SceneManager.LoadScene(1);
