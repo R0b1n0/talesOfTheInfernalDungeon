@@ -61,7 +61,7 @@ public class ScMenuManager : MonoBehaviour {
         
     }
     public void Play() {
-        SceneManager.LoadScene("RobScene");
+        SceneManager.LoadScene(1);
     }
 
     public void Lore() {
